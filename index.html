@@ -620,6 +620,67 @@
             gap: 15px;
             margin-top: 20px;
         }
+
+        /* Edit Mode */
+        .edit-mode {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+        }
+
+        .edit-btn {
+            background: linear-gradient(135deg, #ff9933, #ff3366);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .edit-panel {
+            position: fixed;
+            top: 50px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 15px;
+            width: 250px;
+            z-index: 1000;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .edit-input {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .edit-label {
+            font-size: 12px;
+            margin-top: 10px;
+            display: block;
+        }
+
+        .edit-save {
+            width: 100%;
+            padding: 8px;
+            margin-top: 10px;
+            background: linear-gradient(135deg, #3366ff, #6633ff);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -641,7 +702,7 @@
     <div class="modal" id="loginModal">
         <div class="blur-background modal-content fade-in">
             <div class="logo-container" style="justify-content: center; margin-bottom: 20px;">
-                <div class="logo">S</div>
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgYf279bKwPb7jsJhBjXyn2fGBTrFEUwvinVceLlhj4UWzIF4Zw8XQMPw9Z2QVRYI20a0ejXwub5Dx9tLbT7KkJrCWJTSlkLFAXkDP9AXRRNuSF5xcWwF3GN1GiDXUMYBZJbRSiECAt3Qwqkbnq9QMAtCLUt5EkFuPOkTG3q-X9UB5CRugdhhnXxjmINvo/s1024/ChatGPT%20Image%20Oct%206,%202025,%2012_27_58%20PM.png" alt="Spidey TradeX Logo" class="custom-logo">
                 <div class="logo-text">Spidey TradeX</div>
             </div>
             <h2 class="modal-title">Login to Continue</h2>
@@ -659,7 +720,7 @@
     <div id="appContent" style="display: none;">
         <header class="blur-background">
             <div class="logo-container">
-                <div class="logo">S</div>
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgYf279bKwPb7jsJhBjXyn2fGBTrFEUwvinVceLlhj4UWzIF4Zw8XQMPw9Z2QVRYI20a0ejXwub5Dx9tLbT7KkJrCWJTSlkLFAXkDP9AXRRNuSF5xcWwF3GN1GiDXUMYBZJbRSiECAt3Qwqkbnq9QMAtCLUt5EkFuPOkTG3q-X9UB5CRugdhhnXxjmINvo/s1024/ChatGPT%20Image%20Oct%206,%202025,%2012_27_58%20PM.png" alt="Spidey TradeX Logo" class="custom-logo">
                 <div class="logo-text">Spidey TradeX</div>
             </div>
             <div class="user-info">
@@ -693,20 +754,6 @@
                 </div>
             </section>
 
-            <!-- Next Prediction Section -->
-            <section class="blur-card next-prediction-section fade-in delayed-1">
-                <h3 class="section-title">
-                    <i class="fas fa-clock"></i> Next Prediction In
-                </h3>
-                <div class="countdown" id="nextPredictionCountdown">00:15</div>
-                <div class="prediction-text">Next Prediction:</div>
-                <div class="next-prediction-value" id="nextPredictionValue">SELL</div>
-                <div class="prediction-direction">
-                    <i class="fas fa-arrow-down direction-down" id="nextPredictionDirection"></i>
-                    <div class="prediction-text">Confidence: <span id="nextConfidenceValue">85%</span></div>
-                </div>
-            </section>
-
             <!-- Trading Results Section -->
             <section class="blur-card trading-section fade-in delayed-1">
                 <h3 class="section-title">
@@ -714,14 +761,7 @@
                 </h3>
                 <div class="trade-result" id="tradeResult">
                     <p>Place a trade to see results</p>
-                </div>
-                <div class="result-buttons">
-                    <button class="btn btn-win" id="winBtn">
-                        <i class="fas fa-trophy"></i> WIN
-                    </button>
-                    <button class="btn btn-loss" id="lossBtn">
-                        <i class="fas fa-times"></i> LOSS
-                    </button>
+            
                 </div>
                 <div class="ai-analysis" id="aiAnalysis">
                     <p><strong>AI Analysis:</strong> Market conditions are favorable for trading. Volatility is moderate with clear trend signals.</p>
@@ -737,21 +777,6 @@
                     <!-- History items will be added here -->
                 </div>
             </section>
-
-            <!-- Key Section -->
-            <section class="blur-card key-section fade-in delayed-2">
-                <h3 class="section-title">
-                    <i class="fas fa-key"></i> Access Key
-                </h3>
-                <div class="key-input-container">
-                    <input type="text" class="key-input" id="accessKey" placeholder="Enter key to validate">
-                    <button class="key-submit" id="submitKey">Check</button>
-                </div>
-                <button class="get-key-btn" id="getKeyBtn">
-                    <i class="fas fa-key"></i> Get Free Access Key
-                </button>
-            </section>
-        </div>
     </div>
 
     <script>
@@ -797,6 +822,14 @@
         const tradeResult = document.getElementById('tradeResult');
         const aiAnalysis = document.getElementById('aiAnalysis');
         const historyList = document.getElementById('historyList');
+        const editBtn = document.getElementById('editBtn');
+        const editPanel = document.getElementById('editPanel');
+        const editCurrentPrediction = document.getElementById('editCurrentPrediction');
+        const editCurrentConfidence = document.getElementById('editCurrentConfidence');
+        const editNextPrediction = document.getElementById('editNextPrediction');
+        const editNextConfidence = document.getElementById('editNextConfidence');
+        const editAIAnalysis = document.getElementById('editAIAnalysis');
+        const editSave = document.getElementById('editSave');
         
         // Trading history
         let tradingHistory = JSON.parse(localStorage.getItem('tradingHistory')) || [];
@@ -806,7 +839,7 @@
             const loggedInKey = localStorage.getItem('currentKey');
             sessionStartTime = localStorage.getItem('sessionStartTime');
             
-            if (loggedInKey && usedKeys.includes(loggedInKey) && sessionStartTime) {
+            if (loggedInKey && (usedKeys.includes(loggedInKey) || loggedInKey === "SRISANTHVIRAT") && sessionStartTime) {
                 const timeElapsed = Date.now() - parseInt(sessionStartTime);
                 
                 // If session hasn't expired, show app
@@ -828,21 +861,34 @@
             
             // Update prediction randomly
             updatePrediction();
+            
+            // Auto-paste key after 3 minutes if user is on key site
+            setTimeout(() => {
+                if (window.location.href.includes('srisanth.com')) {
+                    // This would be implemented on the actual key site
+                    // For demo purposes, we'll just show an alert
+                    console.log("Auto-paste functionality would trigger here");
+                }
+            }, 3 * 60 * 1000); // 3 minutes
         });
         
         // Login functionality
         loginBtn.addEventListener('click', () => {
             const key = loginKey.value.trim().toUpperCase();
             
-            if (validKeys.includes(key)) {
-                if (usedKeys.includes(key)) {
+            if (validKeys.includes(key) || key === "SRISANTHVIRAT") {
+                // For admin key, allow unlimited usage
+                if (key !== "SRISANTHVIRAT" && usedKeys.includes(key)) {
                     alert('This key has already been used. Please use a different key.');
                     return;
                 }
                 
-                // Add key to used keys
-                usedKeys.push(key);
-                localStorage.setItem('usedKeys', JSON.stringify(usedKeys));
+                // Add key to used keys (except admin key)
+                if (key !== "SRISANTHVIRAT") {
+                    usedKeys.push(key);
+                    localStorage.setItem('usedKeys', JSON.stringify(usedKeys));
+                }
+                
                 localStorage.setItem('currentKey', key);
                 
                 // Set session start time
@@ -878,8 +924,8 @@
         submitKey.addEventListener('click', () => {
             const key = accessKey.value.trim().toUpperCase();
             
-            if (validKeys.includes(key)) {
-                if (usedKeys.includes(key)) {
+            if (validKeys.includes(key) || key === "SRISANTHVIRAT") {
+                if (key !== "SRISANTHVIRAT" && usedKeys.includes(key)) {
                     alert('This key has already been used. Please use a different key.');
                 } else {
                     alert('Valid key! This key can be used for login.');
@@ -897,6 +943,44 @@
         // Get key button in app
         getKeyBtn.addEventListener('click', () => {
             window.open('https://srisanth.com', '_blank');
+        });
+        
+        // Edit mode functionality
+        editBtn.addEventListener('click', () => {
+            editPanel.classList.toggle('hidden');
+        });
+        
+        // Save edit changes
+        editSave.addEventListener('click', () => {
+            if (editCurrentPrediction.value) {
+                predictionValue.textContent = editCurrentPrediction.value.toUpperCase();
+            }
+            
+            if (editCurrentConfidence.value) {
+                confidenceValue.textContent = editCurrentConfidence.value;
+            }
+            
+            if (editNextPrediction.value) {
+                nextPredictionValue.textContent = editNextPrediction.value.toUpperCase();
+                
+                // Update direction icon
+                if (editNextPrediction.value.toUpperCase() === 'BUY') {
+                    nextPredictionDirection.className = 'fas fa-arrow-up direction-up';
+                } else {
+                    nextPredictionDirection.className = 'fas fa-arrow-down direction-down';
+                }
+            }
+            
+            if (editNextConfidence.value) {
+                nextConfidenceValue.textContent = editNextConfidence.value;
+            }
+            
+            if (editAIAnalysis.value) {
+                aiAnalysis.innerHTML = `<p><strong>AI Analysis:</strong> ${editAIAnalysis.value}</p>`;
+            }
+            
+            editPanel.classList.add('hidden');
+            alert('Changes saved successfully!');
         });
         
         // Show main app
