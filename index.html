@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spidey TradeX - Trading Predictions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0c0c2e, #1a1a3e);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            transition: all 0.5s ease;
+        }
+
+        body.win-glow {
+            box-shadow: 0 0 50px 20px rgba(0, 255, 0, 0.3) inset;
+        }
+
+        body.loss-glow {
+            box-shadow: 0 0 50px 20px rgba(255, 0, 0, 0.3) inset;
+        }
+        
+        /* Trading Animation Background */
+        .trading-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        
+        .trading-line {
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, #33ccff, transparent);
+            animation: tradingLine 3s linear infinite;
+        }
+        
+        .trading-line:nth-child(1) {
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .trading-line:nth-child(2) {
+            left: 30%;
+            animation-delay: 1s;
+        }
+        
+        .trading-line:nth-child(3) {
+            left: 50%;
+            animation-delay: 2s;
+        }
+        
+        .trading-line:nth-child(4) {
+            left: 70%;
+            animation-delay: 1.5s;
+        }
+        
+        .trading-line:nth-child(5) {
+            left: 90%;
+            animation-delay: 0.5s;
+        }
+
+        .floating-element {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff3366, #ff9933);
+            animation: float 8s infinite ease-in-out;
+            opacity: 0.3;
+        }
+
+        .floating-element:nth-child(6) {
+            top: 20%;
+            left: 15%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(7) {
+            top: 60%;
+            left: 80%;
+            animation-delay: 1s;
+        }
+
+        .floating-element:nth-child(8) {
+            top: 80%;
+            left: 40%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(9) {
+            top: 30%;
+            left: 70%;
+            animation-delay: 3s;
+        }
+
+        .floating-element:nth-child(10) {
+            top: 70%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+        
+        @keyframes tradingLine {
+            0% {
+                top: -100%;
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                top: 100%;
+                opacity: 0;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+            }
+            25% {
+                transform: translateY(-20px) translateX(10px);
+            }
+            50% {
+                transform: translateY(0) translateX(20px);
+            }
+            75% {
+                transform: translateY(20px) translateX(10px);
+            }
+        }
+        
+        /* iOS Blur Effects */
+        .blur-background {
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .blur-card {
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+        
+        /* Header Styles */
+        header {
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #ff3366, #ff6633);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 18px;
+            box-shadow: 0 0 15px rgba(255, 51, 102, 0.5);
+        }
+        
+        .logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff3366, #ff9933);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+        }
+        
+        .user-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #33ccff, #3366ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        /* Main Content */
+        .container {
+            padding: 20px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .time-prediction-section {
+            margin-bottom: 25px;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .time-display {
+            font-size: 16px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .ist-badge {
+            background: linear-gradient(135deg, #ff3366, #ff9933);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .prediction-card {
+            text-align: center;
+            padding: 15px;
+            border-radius: 15px;
+            margin: 15px 0;
+            animation: pulse 2s infinite;
+        }
+        
+        .prediction-text {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #ccc;
+        }
+        
+        .prediction-value {
+            font-size: 32px;
+            font-weight: 800;
+            margin: 10px 0;
+            background: linear-gradient(135deg, #33ff99, #33ccff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-buy {
+            background: linear-gradient(135deg, #00cc66, #00cc99);
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 204, 102, 0.4);
+        }
+        
+        .btn-sell {
+            background: linear-gradient(135deg, #ff3366, #ff5050);
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 51, 102, 0.4);
+        }
+
+        .btn-win {
+            background: linear-gradient(135deg, #00cc66, #00cc99);
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 204, 102, 0.4);
+        }
+
+        .btn-loss {
+            background: linear-gradient(135deg, #ff3366, #ff5050);
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 51, 102, 0.4);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* Key Section */
+        .key-section {
+            margin: 25px 0;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .section-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .key-input-container {
+            display: flex;
+            margin-bottom: 15px;
+        }
+        
+        .key-input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 12px 0 0 12px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 16px;
+        }
+        
+        .key-submit {
+            padding: 0 20px;
+            border: none;
+            border-radius: 0 12px 12px 0;
+            background: linear-gradient(135deg, #3366ff, #6633ff);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .get-key-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #ff9933, #ff6633);
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        /* Trading Section */
+        .trading-section {
+            margin: 25px 0;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .trade-result {
+            text-align: center;
+            padding: 15px;
+            border-radius: 15px;
+            margin: 15px 0;
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .result-win {
+            color: #33ff99;
+            font-weight: bold;
+        }
+        
+        .result-loss {
+            color: #ff3366;
+            font-weight: bold;
+        }
+        
+        .ai-analysis {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 15px;
+            margin-top: 15px;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        /* Next Prediction Section */
+        .next-prediction-section {
+            margin: 25px 0;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .countdown {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 10px 0;
+            background: linear-gradient(135deg, #ff9933, #ff3366);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .next-prediction-value {
+            font-size: 28px;
+            font-weight: 800;
+            margin: 10px 0;
+            text-align: center;
+            background: linear-gradient(135deg, #ffcc33, #ff9933);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .prediction-direction {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .direction-up {
+            color: #33ff99;
+            font-size: 24px;
+        }
+
+        .direction-down {
+            color: #ff3366;
+            font-size: 24px;
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        .delayed-1 {
+            animation-delay: 0.2s;
+            opacity: 0;
+        }
+        
+        .delayed-2 {
+            animation-delay: 0.4s;
+            opacity: 0;
+        }
+
+        .pop-animation {
+            animation: pop 0.5s ease;
+        }
+        
+        /* Login Modal */
+        .modal {
+            display: flex;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            width: 90%;
+            max-width: 400px;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ff3366, #ff9933);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .modal-input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 16px;
+        }
+        
+        .modal-btn {
+            width: 100%;
+            padding: 15px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #3366ff, #6633ff);
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        .admin-note {
+            font-size: 12px;
+            margin-top: 15px;
+            color: #aaa;
+        }
+        
+        .logout-btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        /* Trading History */
+        .history-section {
+            margin: 25px 0;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .history-list {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-top: 10px;
+        }
+        
+        .history-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .history-time {
+            font-size: 12px;
+            color: #aaa;
+        }
+        
+        .history-action {
+            font-weight: bold;
+        }
+        
+        .history-result {
+            font-weight: bold;
+        }
+        
+        /* Logo with custom image */
+        .custom-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: 0 0 15px rgba(255, 51, 102, 0.5);
+        }
+
+        /* Win/Loss Buttons */
+        .result-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Trading Animation Background -->
+    <div class="trading-animation">
+        <div class="trading-line"></div>
+        <div class="trading-line"></div>
+        <div class="trading-line"></div>
+        <div class="trading-line"></div>
+        <div class="trading-line"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="blur-background modal-content fade-in">
+            <div class="logo-container" style="justify-content: center; margin-bottom: 20px;">
+                <div class="logo">S</div>
+                <div class="logo-text">Spidey TradeX</div>
+            </div>
+            <h2 class="modal-title">Login to Continue</h2>
+            <input type="text" class="modal-input" id="loginKey" placeholder="Enter Your Access Key">
+            <button class="modal-btn" id="loginBtn">Login</button>
+            <p class="admin-note">-----------Get Free Key Access---------</p>
+            
+            <button class="get-key-btn" id="getKeyBtnLogin" style="margin-top: 20px;">
+                <i class="fas fa-key"></i> Get Access Key
+            </button>
+        </div>
+    </div>
+
+    <!-- Main App (hidden until login) -->
+    <div id="appContent" style="display: none;">
+        <header class="blur-background">
+            <div class="logo-container">
+                <div class="logo">S</div>
+                <div class="logo-text">Spidey TradeX</div>
+            </div>
+            <div class="user-info">
+                <span id="userTimer">24:00:00</span>
+                <button class="logout-btn" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </header>
+
+        <div class="container">
+            <!-- Time and Prediction Section -->
+            <section class="blur-card time-prediction-section fade-in">
+                <div class="time-display">
+                    <span id="currentTime">Loading...</span>
+                    <span class="ist-badge">IST</span>
+                </div>
+                <div class="prediction-card blur-background">
+                    <div class="prediction-text">Current Prediction</div>
+                    <div class="prediction-value" id="predictionValue">BUY</div>
+                    <div class="prediction-text">Confidence: <span id="confidenceValue">92%</span></div>
+                    <div class="prediction-text">Valid for: <span id="predictionTimer">15</span>s</div>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn btn-buy" id="buyBtn">
+                        <i class="fas fa-arrow-up"></i> BUY
+                    </button>
+                    <button class="btn btn-sell" id="sellBtn">
+                        <i class="fas fa-arrow-down"></i> SELL
+                    </button>
+                </div>
+            </section>
+
+            <!-- Next Prediction Section -->
+            <section class="blur-card next-prediction-section fade-in delayed-1">
+                <h3 class="section-title">
+                    <i class="fas fa-clock"></i> Next Prediction In
+                </h3>
+                <div class="countdown" id="nextPredictionCountdown">00:15</div>
+                <div class="prediction-text">Next Prediction:</div>
+                <div class="next-prediction-value" id="nextPredictionValue">SELL</div>
+                <div class="prediction-direction">
+                    <i class="fas fa-arrow-down direction-down" id="nextPredictionDirection"></i>
+                    <div class="prediction-text">Confidence: <span id="nextConfidenceValue">85%</span></div>
+                </div>
+            </section>
+
+            <!-- Trading Results Section -->
+            <section class="blur-card trading-section fade-in delayed-1">
+                <h3 class="section-title">
+                    <i class="fas fa-chart-line"></i> Trading Results
+                </h3>
+                <div class="trade-result" id="tradeResult">
+                    <p>Place a trade to see results</p>
+                </div>
+                <div class="result-buttons">
+                    <button class="btn btn-win" id="winBtn">
+                        <i class="fas fa-trophy"></i> WIN
+                    </button>
+                    <button class="btn btn-loss" id="lossBtn">
+                        <i class="fas fa-times"></i> LOSS
+                    </button>
+                </div>
+                <div class="ai-analysis" id="aiAnalysis">
+                    <p><strong>AI Analysis:</strong> Market conditions are favorable for trading. Volatility is moderate with clear trend signals.</p>
+                </div>
+            </section>
+
+            <!-- Trading History -->
+            <section class="blur-card history-section fade-in delayed-2">
+                <h3 class="section-title">
+                    <i class="fas fa-history"></i> Trading History
+                </h3>
+                <div class="history-list" id="historyList">
+                    <!-- History items will be added here -->
+                </div>
+            </section>
+
+            <!-- Key Section -->
+            <section class="blur-card key-section fade-in delayed-2">
+                <h3 class="section-title">
+                    <i class="fas fa-key"></i> Access Key
+                </h3>
+                <div class="key-input-container">
+                    <input type="text" class="key-input" id="accessKey" placeholder="Enter key to validate">
+                    <button class="key-submit" id="submitKey">Check</button>
+                </div>
+                <button class="get-key-btn" id="getKeyBtn">
+                    <i class="fas fa-key"></i> Get Free Access Key
+                </button>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Predefined keys
+        const validKeys = [
+            "K29D-JS84-MQ71", "T58L-ZA63-RY94", "M47X-QP26-VE85", 
+            "R13B-LN79-TD52", "Z85H-WQ42-KL97", "P64C-FD91-XR38", 
+            "Y73S-HT85-JG60", "D46V-MR29-QB83", "L92F-ZT34-WX57", 
+            "S18K-GP70-ND46", "SRISANTHVIRAT"
+        ];
+        
+        let usedKeys = JSON.parse(localStorage.getItem('usedKeys')) || [];
+        let sessionTimer;
+        let predictionTimer;
+        let nextPredictionTimer;
+        let sessionStartTime;
+        const SESSION_DURATION = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+        const PREDICTION_INTERVAL = 15 * 1000; // 15 seconds in milliseconds
+        
+        // DOM Elements
+        const loginModal = document.getElementById('loginModal');
+        const appContent = document.getElementById('appContent');
+        const loginBtn = document.getElementById('loginBtn');
+        const loginKey = document.getElementById('loginKey');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const currentTime = document.getElementById('currentTime');
+        const userTimer = document.getElementById('userTimer');
+        const predictionValue = document.getElementById('predictionValue');
+        const confidenceValue = document.getElementById('confidenceValue');
+        const predictionTimerDisplay = document.getElementById('predictionTimer');
+        const nextPredictionCountdown = document.getElementById('nextPredictionCountdown');
+        const nextPredictionValue = document.getElementById('nextPredictionValue');
+        const nextConfidenceValue = document.getElementById('nextConfidenceValue');
+        const nextPredictionDirection = document.getElementById('nextPredictionDirection');
+        const accessKey = document.getElementById('accessKey');
+        const submitKey = document.getElementById('submitKey');
+        const getKeyBtn = document.getElementById('getKeyBtn');
+        const getKeyBtnLogin = document.getElementById('getKeyBtnLogin');
+        const buyBtn = document.getElementById('buyBtn');
+        const sellBtn = document.getElementById('sellBtn');
+        const winBtn = document.getElementById('winBtn');
+        const lossBtn = document.getElementById('lossBtn');
+        const tradeResult = document.getElementById('tradeResult');
+        const aiAnalysis = document.getElementById('aiAnalysis');
+        const historyList = document.getElementById('historyList');
+        
+        // Trading history
+        let tradingHistory = JSON.parse(localStorage.getItem('tradingHistory')) || [];
+        
+        // Check if user is already logged in
+        window.addEventListener('DOMContentLoaded', () => {
+            const loggedInKey = localStorage.getItem('currentKey');
+            sessionStartTime = localStorage.getItem('sessionStartTime');
+            
+            if (loggedInKey && usedKeys.includes(loggedInKey) && sessionStartTime) {
+                const timeElapsed = Date.now() - parseInt(sessionStartTime);
+                
+                // If session hasn't expired, show app
+                if (timeElapsed < SESSION_DURATION) {
+                    showApp();
+                    startSessionTimer();
+                    startPredictionTimers();
+                    updateTradingHistory();
+                } else {
+                    // Session expired, clear data
+                    localStorage.removeItem('currentKey');
+                    localStorage.removeItem('sessionStartTime');
+                }
+            }
+            
+            // Update time display
+            updateTime();
+            setInterval(updateTime, 1000);
+            
+            // Update prediction randomly
+            updatePrediction();
+        });
+        
+        // Login functionality
+        loginBtn.addEventListener('click', () => {
+            const key = loginKey.value.trim().toUpperCase();
+            
+            if (validKeys.includes(key)) {
+                if (usedKeys.includes(key)) {
+                    alert('This key has already been used. Please use a different key.');
+                    return;
+                }
+                
+                // Add key to used keys
+                usedKeys.push(key);
+                localStorage.setItem('usedKeys', JSON.stringify(usedKeys));
+                localStorage.setItem('currentKey', key);
+                
+                // Set session start time
+                sessionStartTime = Date.now();
+                localStorage.setItem('sessionStartTime', sessionStartTime.toString());
+                
+                // Start session timer
+                startSessionTimer();
+                
+                // Start prediction timers
+                startPredictionTimers();
+                
+                // Show main app
+                showApp();
+            } else {
+                alert('Invalid key. Please enter a valid key.');
+            }
+        });
+        
+        // Logout functionality
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('currentKey');
+            localStorage.removeItem('sessionStartTime');
+            clearInterval(sessionTimer);
+            clearInterval(predictionTimer);
+            clearInterval(nextPredictionTimer);
+            loginModal.style.display = 'flex';
+            appContent.style.display = 'none';
+            loginKey.value = '';
+        });
+        
+        // Submit key functionality
+        submitKey.addEventListener('click', () => {
+            const key = accessKey.value.trim().toUpperCase();
+            
+            if (validKeys.includes(key)) {
+                if (usedKeys.includes(key)) {
+                    alert('This key has already been used. Please use a different key.');
+                } else {
+                    alert('Valid key! This key can be used for login.');
+                }
+            } else {
+                alert('Invalid key. Please enter a valid key.');
+            }
+        });
+        
+        // Get key button on login page
+        getKeyBtnLogin.addEventListener('click', () => {
+            window.open('https://srisanth.com', '_blank');
+        });
+        
+        // Get key button in app
+        getKeyBtn.addEventListener('click', () => {
+            window.open('https://srisanth.com', '_blank');
+        });
+        
+        // Show main app
+        function showApp() {
+            loginModal.style.display = 'none';
+            appContent.style.display = 'block';
+        }
+        
+        // Update time display
+        function updateTime() {
+            const now = new Date();
+            const options = { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                hour12: true 
+            };
+            currentTime.textContent = now.toLocaleTimeString('en-IN', options);
+        }
+        
+        // Update prediction randomly with more realistic values
+        function updatePrediction() {
+            const actions = ['BUY', 'SELL'];
+            const randomAction = actions[Math.floor(Math.random() * actions.length)];
+            const nextRandomAction = actions[Math.floor(Math.random() * actions.length)];
+            const confidence = Math.floor(Math.random() * 20) + 80; // 80-99%
+            const nextConfidence = Math.floor(Math.random() * 20) + 75; // 75-94%
+            
+            predictionValue.textContent = randomAction;
+            confidenceValue.textContent = `${confidence}%`;
+            
+            nextPredictionValue.textContent = nextRandomAction;
+            nextConfidenceValue.textContent = `${nextConfidence}%`;
+            
+            // Update direction icon
+            if (nextRandomAction === 'BUY') {
+                nextPredictionDirection.className = 'fas fa-arrow-up direction-up';
+            } else {
+                nextPredictionDirection.className = 'fas fa-arrow-down direction-down';
+            }
+            
+            // Update AI analysis based on prediction
+            updateAIAnalysis(randomAction, confidence);
+            
+            // Add animation
+            predictionValue.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                predictionValue.style.transform = 'scale(1)';
+            }, 300);
+        }
+        
+        // Update AI analysis text
+        function updateAIAnalysis(action, confidence) {
+            let analysisText = '';
+            
+            if (action === 'BUY') {
+                if (confidence > 90) {
+                    analysisText = `<strong>AI Analysis:</strong> Strong bullish signals detected. Market indicators show upward momentum with high probability of gains. Recommended action: BUY with confidence.`;
+                } else {
+                    analysisText = `<strong>AI Analysis:</strong> Moderate bullish signals. Market shows potential for upward movement but with some resistance. Consider BUY with caution.`;
+                }
+            } else {
+                if (confidence > 90) {
+                    analysisText = `<strong>AI Analysis:</strong> Strong bearish signals detected. Market indicators show downward pressure with high probability of decline. Recommended action: SELL with confidence.`;
+                } else {
+                    analysisText = `<strong>AI Analysis:</strong> Moderate bearish signals. Market shows potential for downward movement but with some support levels. Consider SELL with caution.`;
+                }
+            }
+            
+            aiAnalysis.innerHTML = analysisText;
+        }
+        
+        // Start session timer
+        function startSessionTimer() {
+            sessionStartTime = parseInt(localStorage.getItem('sessionStartTime'));
+            
+            sessionTimer = setInterval(() => {
+                const timeElapsed = Date.now() - sessionStartTime;
+                const timeRemaining = SESSION_DURATION - timeElapsed;
+                
+                if (timeRemaining <= 0) {
+                    // Session expired
+                    clearInterval(sessionTimer);
+                    clearInterval(predictionTimer);
+                    clearInterval(nextPredictionTimer);
+                    localStorage.removeItem('currentKey');
+                    localStorage.removeItem('sessionStartTime');
+                    alert('Your 24-hour session has expired. Please login again.');
+                    loginModal.style.display = 'flex';
+                    appContent.style.display = 'none';
+                    return;
+                }
+                
+                // Update timer display
+                const hours = Math.floor(timeRemaining / (1000 * 60 * 60));
+                const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+                
+                userTimer.textContent = 
+                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
+        
+        // Start prediction timers
+        function startPredictionTimers() {
+            let predictionTimeLeft = 15;
+            
+            // Current prediction timer
+            predictionTimer = setInterval(() => {
+                predictionTimeLeft--;
+                predictionTimerDisplay.textContent = predictionTimeLeft;
+                
+                if (predictionTimeLeft <= 0) {
+                    predictionTimeLeft = 15;
+                    updatePrediction();
+                }
+            }, 1000);
+            
+            // Next prediction countdown
+            let nextPredictionTimeLeft = 15;
+            
+            nextPredictionTimer = setInterval(() => {
+                nextPredictionTimeLeft--;
+                
+                const minutes = Math.floor(nextPredictionTimeLeft / 60);
+                const seconds = nextPredictionTimeLeft % 60;
+                
+                nextPredictionCountdown.textContent = 
+                    `00:${seconds.toString().padStart(2, '0')}`;
+                
+                if (nextPredictionTimeLeft <= 0) {
+                    nextPredictionTimeLeft = 15;
+                }
+            }, 1000);
+        }
+        
+        // Buy/Sell button functionality
+        buyBtn.addEventListener('click', function() {
+            processTrade('BUY');
+        });
+        
+        sellBtn.addEventListener('click', function() {
+            processTrade('SELL');
+        });
+
+        // Win/Loss button functionality
+        winBtn.addEventListener('click', function() {
+            showResult('WIN');
+            document.body.classList.add('win-glow');
+            setTimeout(() => {
+                document.body.classList.remove('win-glow');
+            }, 2000);
+        });
+
+        lossBtn.addEventListener('click', function() {
+            showResult('LOSS');
+            document.body.classList.add('loss-glow');
+            setTimeout(() => {
+                document.body.classList.remove('loss-glow');
+            }, 2000);
+        });
+        
+        function processTrade(action) {
+            const prediction = predictionValue.textContent;
+            const isCorrect = action === prediction;
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-IN', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            
+            // Generate random profit/loss
+            let profitLoss;
+            let resultClass;
+            let resultText;
+            
+            if (isCorrect) {
+                profitLoss = (Math.random() * 5 + 1).toFixed(2); // 1-6% profit
+                resultClass = 'result-win';
+                resultText = `WIN! +${profitLoss}% profit`;
+                tradeResult.innerHTML = `<p class="${resultClass}">${resultText}</p><p>Your ${action} trade was correct!</p>`;
+                
+                // Add win glow
+                document.body.classList.add('win-glow');
+                setTimeout(() => {
+                    document.body.classList.remove('win-glow');
+                }, 2000);
+            } else {
+                profitLoss = (Math.random() * 3 + 1).toFixed(2); // 1-4% loss
+                resultClass = 'result-loss';
+                resultText = `LOSS! -${profitLoss}%`;
+                tradeResult.innerHTML = `<p class="${resultClass}">${resultText}</p><p>Prediction was ${prediction}, but you chose ${action}</p>`;
+                
+                // Add loss glow
+                document.body.classList.add('loss-glow');
+                setTimeout(() => {
+                    document.body.classList.remove('loss-glow');
+                }, 2000);
+            }
+            
+            // Add to trading history
+            tradingHistory.unshift({
+                time: timeString,
+                action: action,
+                prediction: prediction,
+                result: resultText,
+                isWin: isCorrect
+            });
+            
+            // Keep only last 10 trades
+            if (tradingHistory.length > 10) {
+                tradingHistory = tradingHistory.slice(0, 10);
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('tradingHistory', JSON.stringify(tradingHistory));
+            
+            // Update history display
+            updateTradingHistory();
+            
+            // Add animation
+            tradeResult.classList.add('pop-animation');
+            setTimeout(() => {
+                tradeResult.classList.remove('pop-animation');
+            }, 500);
+            
+            // Show trade alert
+            showTradeAlert(action, profitLoss, isCorrect);
+        }
+
+        function showResult(result) {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-IN', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            
+            let resultClass, resultText;
+            
+            if (result === 'WIN') {
+                const profitLoss = (Math.random() * 5 + 1).toFixed(2);
+                resultClass = 'result-win';
+                resultText = `WIN! +${profitLoss}% profit`;
+                tradeResult.innerHTML = `<p class="${resultClass}">${resultText}</p><p>Congratulations on your successful trade!</p>`;
+            } else {
+                const profitLoss = (Math.random() * 3 + 1).toFixed(2);
+                resultClass = 'result-loss';
+                resultText = `LOSS! -${profitLoss}%`;
+                tradeResult.innerHTML = `<p class="${resultClass}">${resultText}</p><p>Better luck next time!</p>`;
+            }
+            
+            // Add to trading history
+            tradingHistory.unshift({
+                time: timeString,
+                action: 'MANUAL',
+                prediction: 'N/A',
+                result: resultText,
+                isWin: result === 'WIN'
+            });
+            
+            // Keep only last 10 trades
+            if (tradingHistory.length > 10) {
+                tradingHistory = tradingHistory.slice(0, 10);
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('tradingHistory', JSON.stringify(tradingHistory));
+            
+            // Update history display
+            updateTradingHistory();
+            
+            // Add animation
+            tradeResult.classList.add('pop-animation');
+            setTimeout(() => {
+                tradeResult.classList.remove('pop-animation');
+            }, 500);
+        }
+        
+        function updateTradingHistory() {
+            historyList.innerHTML = '';
+            
+            if (tradingHistory.length === 0) {
+                historyList.innerHTML = '<p style="text-align: center; color: #aaa; padding: 10px;">No trades yet</p>';
+                return;
+            }
+            
+            tradingHistory.forEach(trade => {
+                const historyItem = document.createElement('div');
+                historyItem.className = 'history-item';
+                
+                historyItem.innerHTML = `
+                    <div>
+                        <div class="history-time">${trade.time}</div>
+                        <div class="history-action">${trade.action} | Prediction: ${trade.prediction}</div>
+                    </div>
+                    <div class="history-result ${trade.isWin ? 'result-win' : 'result-loss'}">${trade.result}</div>
+                `;
+                
+                historyList.appendChild(historyItem);
+            });
+        }
+        
+        function showTradeAlert(action, amount, isWin) {
+            const status = isWin ? 'WIN' : 'LOSS';
+            alert(`Successfully placed ${action} order!\nResult: ${status} ${isWin ? '+' : '-'}${amount}%`);
+        }
+    </script>
+</body>
+</html>
