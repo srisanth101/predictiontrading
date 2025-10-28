@@ -19,6 +19,18 @@
                 radial-gradient(circle at 40% 80%, rgba(50,215,75,0.1) 0%, transparent 50%);
             backdrop-filter: blur(40px); z-index:-1;
         }
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.5; /* 50% opacity */
+            z-index: -2;
+        }
         .container {
             width:100%; min-height:100vh; display:flex; flex-direction:column; padding:20px; position:relative; z-index:1;
             max-width:500px; margin:0 auto;
@@ -116,6 +128,69 @@
         .step-dot.active { background:#007AFF; }
         .error-message { color:#FF453A; font-size:14px; text-align:center; margin-top:10px; display:none; }
         
+        /* DeepSeek Theme Enhancements */
+        .deepseek-theme {
+            background: linear-gradient(135deg, #0f0f1f 0%, #1a1a2e 50%, #16213e 100%);
+        }
+        
+        .deepseek-theme .app-name {
+            background: linear-gradient(90deg, #00D4FF, #0099FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .deepseek-theme .countdown {
+            color: #00D4FF;
+            text-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+        
+        .deepseek-theme .next-btn {
+            background: linear-gradient(90deg, #00D4FF, #0099FF);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
+        }
+        
+        .deepseek-theme .history-title {
+            background: linear-gradient(90deg, #00D4FF, #0099FF);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .deepseek-theme .login-btn {
+            background: linear-gradient(90deg, #00D4FF, #0099FF);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
+        }
+        
+        .deepseek-theme .option-card:hover, 
+        .deepseek-theme .option-card.selected {
+            background: rgba(0, 212, 255, 0.2);
+            border-color: rgba(0, 212, 255, 0.5);
+        }
+        
+        .deepseek-theme .option-card i {
+            color: #00D4FF;
+        }
+        
+        .deepseek-theme .step-dot.active {
+            background: #00D4FF;
+        }
+        
+        .deepseek-theme .input-field:focus {
+            border-color: #00D4FF;
+        }
+        
+        .deepseek-theme .progress-bar {
+            background: linear-gradient(90deg, #00D4FF, #0099FF);
+        }
+        
+        .deepseek-theme .currency-item.selected {
+            background: rgba(0, 212, 255, 0.2);
+            border: 1px solid rgba(0, 212, 255, 0.5);
+        }
+        
+        .deepseek-theme .currency-item .currency-flag {
+            background: #00D4FF;
+        }
+        
         @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
         @keyframes zoomIn { from { transform:scale(0.8); opacity:0; } to { transform:scale(1); opacity:1; } }
         @keyframes pulse { 0%{ transform:scale(1);} 50%{ transform:scale(1.05);} 100%{ transform:scale(1);} }
@@ -157,7 +232,8 @@
         }
     </style>
 </head>
-<body>
+<body class="deepseek-theme">
+    <div class="background-image"></div>
     <div class="glass-effect"></div>
 
     <!-- Login Flow -->
@@ -353,6 +429,47 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is already logged in
+            const savedUserData = localStorage.getItem('spideyTradeXUser');
+            if (savedUserData) {
+                const userData = JSON.parse(savedUserData);
+                // Skip login and show main app
+                document.getElementById('loginContainer').classList.add('hidden');
+                document.getElementById('mainApp').classList.remove('hidden');
+                
+                // Set user data in the app
+                window.userNameValue = userData.name;
+                window.userUIDValue = userData.uid;
+                window.selectedLanguage = userData.language;
+                window.selectedCurrency = userData.currency;
+                
+                // Update language
+                updateLanguage(window.selectedLanguage);
+                
+                // Load trading history if exists
+                const savedHistory = localStorage.getItem('spideyTradeXHistory');
+                if (savedHistory) {
+                    tradeHistory = JSON.parse(savedHistory);
+                    updateHistoryDisplay();
+                }
+                
+                // Load stats if exists
+                const savedStats = localStorage.getItem('spideyTradeXStats');
+                if (savedStats) {
+                    const stats = JSON.parse(savedStats);
+                    buyCount = stats.buyCount || 0;
+                    sellCount = stats.sellCount || 0;
+                    winCount = stats.winCount || 0;
+                    lossCount = stats.lossCount || 0;
+                    
+                    // Update stats display
+                    buyCountElement.textContent = buyCount;
+                    sellCountElement.textContent = sellCount;
+                    winCountElement.textContent = winCount;
+                    lossCountElement.textContent = lossCount;
+                }
+            }
+            
             // Login Flow Elements
             const loginContainer = document.getElementById('loginContainer');
             const mainApp = document.getElementById('mainApp');
@@ -681,6 +798,15 @@
                             userName.value = userNameValue;
                         }
                         
+                        // Save user data to localStorage
+                        const userData = {
+                            name: userNameValue,
+                            uid: userUIDValue,
+                            language: selectedLanguage,
+                            currency: selectedCurrency
+                        };
+                        localStorage.setItem('spideyTradeXUser', JSON.stringify(userData));
+                        
                         // Hide login, show main app
                         loginContainer.classList.add('hidden');
                         mainApp.classList.remove('hidden');
@@ -709,6 +835,15 @@
                     }
                     
                     uidError.style.display = 'none';
+                    
+                    // Save user data to localStorage
+                    const userData = {
+                        name: userNameValue,
+                        uid: userUIDValue,
+                        language: selectedLanguage,
+                        currency: selectedCurrency
+                    };
+                    localStorage.setItem('spideyTradeXUser', JSON.stringify(userData));
                     
                     // Hide login, show main app
                     loginContainer.classList.add('hidden');
@@ -766,6 +901,9 @@
 
                         // Update stats
                         winCountElement.textContent = winCount;
+                        
+                        // Save stats to localStorage
+                        saveStats();
                     }
                 });
 
@@ -786,6 +924,9 @@
 
                         // Update stats
                         lossCountElement.textContent = lossCount;
+                        
+                        // Save stats to localStorage
+                        saveStats();
                     }
                 });
 
@@ -872,6 +1013,9 @@
                     // Update stats display
                     buyCountElement.textContent = buyCount;
                     sellCountElement.textContent = sellCount;
+                    
+                    // Save stats to localStorage
+                    saveStats();
 
                     // Add visual feedback to card border
                     const card = document.querySelector('.prediction-card');
@@ -900,6 +1044,9 @@
 
                     tradeHistory.unshift(historyItem);
                     updateHistoryDisplay();
+                    
+                    // Save history to localStorage
+                    localStorage.setItem('spideyTradeXHistory', JSON.stringify(tradeHistory));
                 }
 
                 function updateHistoryDisplay() {
@@ -930,6 +1077,16 @@
 
                         historyList.appendChild(historyItem);
                     });
+                }
+                
+                function saveStats() {
+                    const stats = {
+                        buyCount,
+                        sellCount,
+                        winCount,
+                        lossCount
+                    };
+                    localStorage.setItem('spideyTradeXStats', JSON.stringify(stats));
                 }
 
                 function generateAnalysis(isBuy, isWin) {
