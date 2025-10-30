@@ -104,16 +104,6 @@
         .login-subtitle { color:#8E8E93; font-size:14px; text-align:center; margin-bottom:30px; }
         .login-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(30px); border-radius:24px; padding:25px; width:100%; border:1px solid rgba(255,255,255,0.15); box-shadow:0 15px 35px rgba(0,0,0,0.3); }
         .login-step { display:flex; flex-direction:column; gap:20px; }
-        .option-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-        .option-card { background:rgba(255,255,255,0.08); border-radius:16px; padding:16px; text-align:center; cursor:pointer; transition:all 0.3s ease; border:1px solid rgba(255,255,255,0.1); }
-        .option-card:hover, .option-card.selected { background:rgba(0,122,255,0.2); border-color:rgba(0,122,255,0.5); }
-        .option-card i { font-size:24px; margin-bottom:8px; color:#007AFF; }
-        .option-card .option-text { font-size:14px; font-weight:600; }
-        .currency-list { max-height:300px; overflow-y:auto; margin-top:10px; }
-        .currency-item { padding:12px 16px; border-radius:12px; background:rgba(255,255,255,0.05); margin-bottom:8px; display:flex; align-items:center; cursor:pointer; transition:all 0.2s ease; }
-        .currency-item:hover { background:rgba(255,255,255,0.1); }
-        .currency-item.selected { background:rgba(0,122,255,0.2); border:1px solid rgba(0,122,255,0.5); }
-        .currency-item .currency-flag { width:24px; height:24px; border-radius:50%; margin-right:12px; background:#007AFF; display:flex; align-items:center; justify-content:center; font-size:12px; }
         .input-group { margin-bottom:20px; }
         .input-label { font-size:14px; color:#8E8E93; margin-bottom:8px; display:block; }
         .input-field { width:100%; padding:16px; border-radius:12px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.1); color:white; font-size:16px; }
@@ -121,11 +111,6 @@
         .login-btn { background:linear-gradient(90deg,#007AFF,#5856D6); color:white; border:none; border-radius:16px; padding:16px; font-size:16px; font-weight:600; cursor:pointer; transition:all 0.3s ease; box-shadow:0 8px 25px rgba(0,122,255,0.4); width:100%; margin-top:10px; }
         .login-btn:active { transform:scale(0.98); }
         .login-btn:disabled { background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.3); cursor:not-allowed; transform:none; box-shadow:0 8px 20px rgba(0,0,0,0.1); }
-        .back-btn { background:rgba(255,255,255,0.1); color:white; border:none; border-radius:16px; padding:14px; font-size:14px; font-weight:600; cursor:pointer; transition:all 0.3s ease; display:flex; align-items:center; justify-content:center; gap:8px; backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,0.1); width:100%; margin-top:10px; }
-        .back-btn:active { transform:scale(0.98); background:rgba(255,255,255,0.15); }
-        .step-indicator { display:flex; justify-content:center; gap:8px; margin-bottom:20px; }
-        .step-dot { width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,0.2); }
-        .step-dot.active { background:#007AFF; }
         .error-message { color:#FF453A; font-size:14px; text-align:center; margin-top:10px; display:none; }
         
         /* DeepSeek Theme Enhancements */
@@ -160,35 +145,12 @@
             box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
         }
         
-        .deepseek-theme .option-card:hover, 
-        .deepseek-theme .option-card.selected {
-            background: rgba(0, 212, 255, 0.2);
-            border-color: rgba(0, 212, 255, 0.5);
-        }
-        
-        .deepseek-theme .option-card i {
-            color: #00D4FF;
-        }
-        
-        .deepseek-theme .step-dot.active {
-            background: #00D4FF;
-        }
-        
         .deepseek-theme .input-field:focus {
             border-color: #00D4FF;
         }
         
         .deepseek-theme .progress-bar {
             background: linear-gradient(90deg, #00D4FF, #0099FF);
-        }
-        
-        .deepseek-theme .currency-item.selected {
-            background: rgba(0, 212, 255, 0.2);
-            border: 1px solid rgba(0, 212, 255, 0.5);
-        }
-        
-        .deepseek-theme .currency-item .currency-flag {
-            background: #00D4FF;
         }
         
         @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
@@ -204,7 +166,6 @@
             .win-btn,.loss-btn,.next-btn { padding:14px; font-size:14px; }
             .stat-item { padding:10px 6px; }
             .stat-value { font-size:16px; }
-            .option-grid { grid-template-columns:1fr; }
             .login-card { padding: 20px; }
             .prediction-card { padding: 20px; }
             .prediction-result .confidence { font-size: 12px; }
@@ -236,7 +197,7 @@
     <div class="background-image"></div>
     <div class="glass-effect"></div>
 
-    <!-- Login Flow -->
+    <!-- Login Page -->
     <div class="login-container" id="loginContainer">
         <div class="login-header">
             <div class="logo-container">
@@ -257,84 +218,24 @@
             </div>
         </div>
 
-        <!-- Step 1: Language Selection -->
-        <div class="login-card" id="step1">
-            <div class="step-indicator">
-                <div class="step-dot active"></div>
-                <div class="step-dot"></div>
-                <div class="step-dot"></div>
-            </div>
-            <div class="login-title">Select Language</div>
-            <div class="login-subtitle">Choose your preferred language</div>
+        <!-- Login Form -->
+        <div class="login-card" id="loginForm">
+            <div class="login-title">Access Spidey TradeX</div>
+            <div class="login-subtitle">Enter your UID and Key to continue</div>
             
             <div class="login-step">
-                <div class="option-grid">
-                    <div class="option-card selected" data-lang="en">
-                        <i class="fas fa-language"></i>
-                        <div class="option-text">English</div>
-                    </div>
-                    <div class="option-card" data-lang="es">
-                        <i class="fas fa-language"></i>
-                        <div class="option-text">Español</div>
-                    </div>
-                    <div class="option-card" data-lang="fr">
-                        <i class="fas fa-language"></i>
-                        <div class="option-text">Français</div>
-                    </div>
-                    <div class="option-card" data-lang="pt">
-                        <i class="fas fa-language"></i>
-                        <div class="option-text">Português</div>
-                    </div>
-                </div>
-                
-                <button class="login-btn" id="step1Next">Next <i class="fas fa-arrow-right"></i></button>
-            </div>
-        </div>
-
-        <!-- Step 2: Currency Pair Selection -->
-        <div class="login-card hidden" id="step2">
-            <div class="step-indicator">
-                <div class="step-dot"></div>
-                <div class="step-dot active"></div>
-                <div class="step-dot"></div>
-            </div>
-            <div class="login-title">Select Currency Pair</div>
-            <div class="login-subtitle">💱 All Currency Pairs</div>
-            
-            <div class="login-step">
-                <div class="currency-list" id="currencyList">
-                    <!-- Currency pairs will be populated by JavaScript -->
-                </div>
-                
-                <button class="back-btn" id="step2Back"><i class="fas fa-arrow-left"></i> Back</button>
-                <button class="login-btn" id="step2Next">Next <i class="fas fa-arrow-right"></i></button>
-            </div>
-        </div>
-
-        <!-- Step 3: Name and UID -->
-        <div class="login-card hidden" id="step3">
-            <div class="step-indicator">
-                <div class="step-dot"></div>
-                <div class="step-dot"></div>
-                <div class="step-dot active"></div>
-            </div>
-            <div class="login-title">Account Details</div>
-            <div class="login-subtitle">Enter your name and UID</div>
-            
-            <div class="login-step">
-                <div class="input-group">
-                    <label class="input-label">Your Name</label>
-                    <input type="text" class="input-field" id="userName" placeholder="Enter your name">
-                </div>
-                
                 <div class="input-group">
                     <label class="input-label">UID</label>
                     <input type="text" class="input-field" id="userUID" placeholder="Enter your UID" inputmode="numeric">
-                    <div class="error-message" id="uidError">Invalid UID. Please use: 123456789, 098765432, or 1010101010</div>
                 </div>
                 
-                <button class="back-btn" id="step3Back"><i class="fas fa-arrow-left"></i> Back</button>
-                <button class="login-btn" id="step3Login">Login <i class="fas fa-sign-in-alt"></i></button>
+                <div class="input-group">
+                    <label class="input-label">Key</label>
+                    <input type="password" class="input-field" id="userKey" placeholder="Enter your key">
+                    <div class="error-message" id="loginError">Invalid UID or Key. Please check your credentials.</div>
+                </div>
+                
+                <button class="login-btn" id="loginBtn">Login <i class="fas fa-sign-in-alt"></i></button>
             </div>
         </div>
     </div>
@@ -438,13 +339,7 @@
                 document.getElementById('mainApp').classList.remove('hidden');
                 
                 // Set user data in the app
-                window.userNameValue = userData.name;
                 window.userUIDValue = userData.uid;
-                window.selectedLanguage = userData.language;
-                window.selectedCurrency = userData.currency;
-                
-                // Update language
-                updateLanguage(window.selectedLanguage);
                 
                 // Load trading history if exists
                 const savedHistory = localStorage.getItem('spideyTradeXHistory');
@@ -470,23 +365,17 @@
                 }
             }
             
-            // Login Flow Elements
+            // Login Elements
             const loginContainer = document.getElementById('loginContainer');
             const mainApp = document.getElementById('mainApp');
-            const step1 = document.getElementById('step1');
-            const step2 = document.getElementById('step2');
-            const step3 = document.getElementById('step3');
-            
-            const step1Next = document.getElementById('step1Next');
-            const step2Back = document.getElementById('step2Back');
-            const step2Next = document.getElementById('step2Next');
-            const step3Back = document.getElementById('step3Back');
-            const step3Login = document.getElementById('step3Login');
-            
-            const currencyList = document.getElementById('currencyList');
-            const userName = document.getElementById('userName');
             const userUID = document.getElementById('userUID');
-            const uidError = document.getElementById('uidError');
+            const userKey = document.getElementById('userKey');
+            const loginBtn = document.getElementById('loginBtn');
+            const loginError = document.getElementById('loginError');
+            
+            // Valid UIDs and Key
+            const validUIDs = ['123456789', '1221122112', '1010101010'];
+            const validKey = 'SrisanthPrediction';
             
             // Main App Elements
             const startBtn = document.getElementById('startBtn');
@@ -508,15 +397,6 @@
             const winCountElement = document.getElementById('winCount');
             const lossCountElement = document.getElementById('lossCount');
 
-            // Login State
-            let selectedLanguage = 'en';
-            let selectedCurrency = '';
-            let userNameValue = '';
-            let userUIDValue = '';
-            
-            // Valid UIDs
-            const validUIDs = ['63004419', '098765432', '1010101010'];
-            
             // Trading State
             let countdown;
             let timeLeft = 15;
@@ -528,621 +408,360 @@
             let resultRecorded = false;
             let tradeHistory = [];
             
-            // Currency Pairs Data
-            const currencyPairs = [
-                "USD/BRL (OTC)", "GBP/NZD (OTC)", "USD/IDR (OTC)", "NZD/CHF (OTC)", "AUD/NZD (OTC)",
-                "NZD/USD (OTC)", "USD/MXN (OTC)", "USD/DZD (OTC)", "NZD/JPY (OTC)", "EUR/JPY",
-                "EUR/USD", "CAD/CHF (OTC)", "EUR/GBP", "USD/ARS (OTC)", "AUD/USD",
-                "GBP/JPY", "GBP/USD", "USD/CAD", "USD/JPY", "NZD/CAD (OTC)",
-                "GBP/AUD", "USD/ZAR (OTC)", "AUD/JPY", "EUR/AUD", "EUR/CAD",
-                "USD/EGP (OTC)", "USD/INR (OTC)", "USD/TRY (OTC)", "USD/COP (OTC)", "AUD/CHF",
-                "CAD/JPY", "CHF/JPY", "GBP/CAD", "USD/CHF", "USD/BDT (OTC)",
-                "USD/NGN (OTC)", "USD/PHP (OTC)", "USD/PKR (OTC)", "EUR/SGD (OTC)", "AUD/CAD",
-                "EUR/CHF", "GBP/CHF", "EUR/NZD (OTC)"
-            ];
-            
-            // Language translations
-            const translations = {
-                en: {
-                    appName: "Spidey TradeX",
-                    subtitle: "AI-Powered Trading Predictions",
-                    selectLanguage: "Select Language",
-                    chooseLanguage: "Choose your preferred language",
-                    selectCurrency: "Select Currency Pair",
-                    allCurrencies: "💱 All Currency Pairs",
-                    accountDetails: "Account Details",
-                    enterDetails: "Enter your name and UID",
-                    yourName: "Your Name",
-                    enterName: "Enter your name",
-                    uid: "UID",
-                    enterUID: "Enter your UID",
-                    next: "Next",
-                    back: "Back",
-                    login: "Login",
-                    nextPrediction: "Next prediction in:",
-                    ready: "Ready to Start",
-                    startPrediction: "Start Prediction",
-                    nextPredictionBtn: "Next Prediction",
-                    viewHistory: "View History",
-                    win: "Win",
-                    loss: "Loss",
-                    buy: "BUY",
-                    sell: "SELL",
-                    wins: "WINS",
-                    losses: "LOSSES",
-                    tradingHistory: "Trading History",
-                    noHistory: "No trading history yet",
-                    aiAnalysis: "AI Analysis:",
-                    clickStart: "Click Start to see the first prediction",
-                    invalidUID: "Invalid UID. Please use: 123456789, 098765432, or 1010101010"
-                },
-                es: {
-                    appName: "Spidey TradeX",
-                    subtitle: "Predicciones de Trading con IA",
-                    selectLanguage: "Seleccionar Idioma",
-                    chooseLanguage: "Elige tu idioma preferido",
-                    selectCurrency: "Seleccionar Par de Divisas",
-                    allCurrencies: "💱 Todos los Pares de Divisas",
-                    accountDetails: "Detalles de la Cuenta",
-                    enterDetails: "Ingresa tu nombre y UID",
-                    yourName: "Tu Nombre",
-                    enterName: "Ingresa tu nombre",
-                    uid: "UID",
-                    enterUID: "Ingresa tu UID",
-                    next: "Siguiente",
-                    back: "Atrás",
-                    login: "Iniciar Sesión",
-                    nextPrediction: "Próxima predicción en:",
-                    ready: "Listo para Empezar",
-                    startPrediction: "Iniciar Predicción",
-                    nextPredictionBtn: "Próxima Predicción",
-                    viewHistory: "Ver Historial",
-                    win: "Ganar",
-                    loss: "Perder",
-                    buy: "COMPRAR",
-                    sell: "VENDER",
-                    wins: "GANADAS",
-                    losses: "PERDIDAS",
-                    tradingHistory: "Historial de Trading",
-                    noHistory: "Aún no hay historial de trading",
-                    aiAnalysis: "Análisis de IA:",
-                    clickStart: "Haz clic en Iniciar para ver la primera predicción",
-                    invalidUID: "UID inválido. Por favor usa: 123456789, 098765432, o 1010101010"
-                },
-                fr: {
-                    appName: "Spidey TradeX",
-                    subtitle: "Prédictions de Trading avec IA",
-                    selectLanguage: "Sélectionner la Langue",
-                    chooseLanguage: "Choisissez votre langue préférée",
-                    selectCurrency: "Sélectionner la Paire de Devises",
-                    allCurrencies: "💱 Toutes les Paires de Devises",
-                    accountDetails: "Détails du Compte",
-                    enterDetails: "Entrez votre nom et UID",
-                    yourName: "Votre Nombre",
-                    enterName: "Entrez votre nom",
-                    uid: "UID",
-                    enterUID: "Entrez votre UID",
-                    next: "Suivant",
-                    back: "Retour",
-                    login: "Connexion",
-                    nextPrediction: "Prochaine prédiction dans:",
-                    ready: "Prêt à Commencer",
-                    startPrediction: "Démarrer la Prédiction",
-                    nextPredictionBtn: "Prédiction Suivante",
-                    viewHistory: "Voir l'Historique",
-                    win: "Gagner",
-                    loss: "Perder",
-                    buy: "ACHETER",
-                    sell: "VENDRE",
-                    wins: "GAINS",
-                    losses: "PERTES",
-                    tradingHistory: "Historique de Trading",
-                    noHistory: "Aucun historique de trading pour le moment",
-                    aiAnalysis: "Analyse IA:",
-                    clickStart: "Cliquez sur Démarrer pour voir la première prédiction",
-                    invalidUID: "UID invalide. Veuillez utiliser: 123456789, 098765432, ou 1010101010"
-                },
-                pt: {
-                    appName: "Spidey TradeX",
-                    subtitle: "Previsões de Trading com IA",
-                    selectLanguage: "Selecionar Idioma",
-                    chooseLanguage: "Escolha seu idioma preferido",
-                    selectCurrency: "Selecionar Par de Moedas",
-                    allCurrencies: "💱 Todos os Pares de Moedas",
-                    accountDetails: "Detalhes da Conta",
-                    enterDetails: "Digite seu nome e UID",
-                    yourName: "Seu Nome",
-                    enterName: "Digite seu nome",
-                    uid: "UID",
-                    enterUID: "Digite seu UID",
-                    next: "Próximo",
-                    back: "Voltar",
-                    login: "Entrar",
-                    nextPrediction: "Próxima previsão em:",
-                    ready: "Pronto para Começar",
-                    startPrediction: "Iniciar Previsão",
-                    nextPredictionBtn: "Próxima Previsão",
-                    viewHistory: "Ver Histórico",
-                    win: "Ganhar",
-                    loss: "Perder",
-                    buy: "COMPRAR",
-                    sell: "VENDER",
-                    wins: "VITÓRIAS",
-                    losses: "DERROTAS",
-                    tradingHistory: "Histórico de Trading",
-                    noHistory: "Ainda não há histórico de trading",
-                    aiAnalysis: "Análise de IA:",
-                    clickStart: "Clique em Iniciar para ver a primeira previsão",
-                    invalidUID: "UID inválido. Por favor use: 123456789, 098765432, ou 1010101010"
-                }
-            };
-            
-            // Update UI with selected language
-            function updateLanguage(lang) {
-                const t = translations[lang];
-                document.querySelector('.app-name').textContent = t.appName;
-                document.querySelector('.subtitle').textContent = t.subtitle;
-                document.querySelector('.login-title').textContent = t.selectLanguage;
-                document.querySelector('.login-subtitle').textContent = t.chooseLanguage;
-                document.getElementById('step1Next').innerHTML = `${t.next} <i class="fas fa-arrow-right"></i>`;
+            // Login Functionality
+            loginBtn.addEventListener('click', function() {
+                const uidValue = userUID.value.trim();
+                const keyValue = userKey.value.trim();
                 
-                // Update step 2
-                document.querySelector('#step2 .login-title').textContent = t.selectCurrency;
-                document.querySelector('#step2 .login-subtitle').textContent = t.allCurrencies;
-                document.getElementById('step2Back').innerHTML = `<i class="fas fa-arrow-left"></i> ${t.back}`;
-                document.getElementById('step2Next').innerHTML = `${t.next} <i class="fas fa-arrow-right"></i>`;
-                
-                // Update step 3
-                document.querySelector('#step3 .login-title').textContent = t.accountDetails;
-                document.querySelector('#step3 .login-subtitle').textContent = t.enterDetails;
-                document.querySelector('#step3 .input-label').textContent = t.yourName;
-                document.getElementById('userName').placeholder = t.enterName;
-                document.querySelectorAll('#step3 .input-label')[1].textContent = t.uid;
-                document.getElementById('userUID').placeholder = t.enterUID;
-                document.getElementById('step3Back').innerHTML = `<i class="fas fa-arrow-left"></i> ${t.back}`;
-                document.getElementById('step3Login').innerHTML = `${t.login} <i class="fas fa-sign-in-alt"></i>`;
-                document.getElementById('uidError').textContent = t.invalidUID;
-                
-                // Update main app
-                document.querySelector('.timer-text').textContent = t.nextPrediction;
-                document.querySelector('.prediction-label').textContent = t.ready;
-                document.getElementById('startBtn').innerHTML = `<i class="fas fa-play"></i> ${t.startPrediction}`;
-                document.getElementById('nextBtn').innerHTML = `<i class="fas fa-redo"></i> ${t.nextPredictionBtn}`;
-                document.getElementById('historyBtn').innerHTML = `<i class="fas fa-history"></i> ${t.viewHistory}`;
-                document.getElementById('winBtn').innerHTML = `<i class="fas fa-check-circle"></i> ${t.win}`;
-                document.getElementById('lossBtn').innerHTML = `<i class="fas fa-times-circle"></i> ${t.loss}`;
-                document.querySelectorAll('.stat-label')[0].textContent = t.buy;
-                document.querySelectorAll('.stat-label')[1].textContent = t.sell;
-                document.querySelectorAll('.stat-label')[2].textContent = t.wins;
-                document.querySelectorAll('.stat-label')[3].textContent = t.losses;
-                document.querySelector('.history-title').textContent = t.tradingHistory;
-                document.querySelector('.empty-history').textContent = t.noHistory;
-                document.querySelector('.analysis-title').innerHTML = `<i class="fas fa-robot"></i> ${t.aiAnalysis}`;
-                document.getElementById('analysisText').textContent = t.clickStart;
-            }
-            
-            // Initialize Login Flow
-            function initializeLoginFlow() {
-                // Populate currency list
-                currencyPairs.forEach(pair => {
-                    const currencyItem = document.createElement('div');
-                    currencyItem.className = 'currency-item';
-                    currencyItem.setAttribute('data-currency', pair);
-                    
-                    const flag = document.createElement('div');
-                    flag.className = 'currency-flag';
-                    flag.textContent = pair.substring(0, 1);
-                    
-                    const text = document.createElement('div');
-                    text.textContent = pair;
-                    
-                    currencyItem.appendChild(flag);
-                    currencyItem.appendChild(text);
-                    
-                    currencyList.appendChild(currencyItem);
-                });
-                
-                // Set first currency as selected by default
-                document.querySelector('.currency-item').classList.add('selected');
-                selectedCurrency = currencyPairs[0];
-                
-                // Language selection
-                document.querySelectorAll('.option-card[data-lang]').forEach(card => {
-                    card.addEventListener('click', function() {
-                        document.querySelectorAll('.option-card[data-lang]').forEach(c => c.classList.remove('selected'));
-                        this.classList.add('selected');
-                        selectedLanguage = this.getAttribute('data-lang');
-                        updateLanguage(selectedLanguage);
-                    });
-                });
-                
-                // Currency selection
-                document.querySelectorAll('.currency-item').forEach(item => {
-                    item.addEventListener('click', function() {
-                        document.querySelectorAll('.currency-item').forEach(i => i.classList.remove('selected'));
-                        this.classList.add('selected');
-                        selectedCurrency = this.getAttribute('data-currency');
-                    });
-                });
-                
-                // Step navigation
-                step1Next.addEventListener('click', function() {
-                    step1.classList.add('hidden');
-                    step2.classList.remove('hidden');
-                });
-                
-                step2Back.addEventListener('click', function() {
-                    step2.classList.add('hidden');
-                    step1.classList.remove('hidden');
-                });
-                
-                step2Next.addEventListener('click', function() {
-                    step2.classList.add('hidden');
-                    step3.classList.remove('hidden');
-                });
-                
-                step3Back.addEventListener('click', function() {
-                    step3.classList.add('hidden');
-                    step2.classList.remove('hidden');
-                });
-                
-                // Auto-login when valid UID is entered
-                userUID.addEventListener('input', function() {
-                    userUIDValue = userUID.value.trim();
-                    
-                    if (validUIDs.includes(userUIDValue)) {
-                        userNameValue = userName.value.trim();
-                        
-                        if (!userNameValue) {
-                            userNameValue = "Trader";
-                            userName.value = userNameValue;
-                        }
-                        
-                        // Save user data to localStorage
-                        const userData = {
-                            name: userNameValue,
-                            uid: userUIDValue,
-                            language: selectedLanguage,
-                            currency: selectedCurrency
-                        };
-                        localStorage.setItem('spideyTradeXUser', JSON.stringify(userData));
-                        
-                        // Hide login, show main app
-                        loginContainer.classList.add('hidden');
-                        mainApp.classList.remove('hidden');
-                    }
-                });
-                
-                // Manual login button as fallback
-                step3Login.addEventListener('click', function() {
-                    userNameValue = userName.value.trim();
-                    userUIDValue = userUID.value.trim();
-                    
-                    if (!userNameValue) {
-                        userNameValue = "Trader";
-                        userName.value = userNameValue;
-                    }
-                    
-                    if (!userUIDValue) {
-                        alert('Please enter your UID');
-                        return;
-                    }
-                    
-                    // Check if UID is valid
-                    if (!validUIDs.includes(userUIDValue)) {
-                        uidError.style.display = 'block';
-                        return;
-                    }
-                    
-                    uidError.style.display = 'none';
+                // Check if UID and Key are valid
+                if (validUIDs.includes(uidValue) && keyValue === validKey) {
+                    loginError.style.display = 'none';
                     
                     // Save user data to localStorage
                     const userData = {
-                        name: userNameValue,
-                        uid: userUIDValue,
-                        language: selectedLanguage,
-                        currency: selectedCurrency
+                        uid: uidValue
                     };
                     localStorage.setItem('spideyTradeXUser', JSON.stringify(userData));
                     
                     // Hide login, show main app
                     loginContainer.classList.add('hidden');
                     mainApp.classList.remove('hidden');
-                });
-            }
-            
-            // Initialize Trading App
-            function initializeTradingApp() {
-                // Helper: format confidence visually (two numbers sum to 100)
-                function generateConfidence(isBuy) {
-                    // base random confidence, skew slightly toward the predicted side
-                    const base = Math.floor(Math.random() * 21) + 55; // 55..75
-                    if (isBuy) return { buy: base, sell: 100 - base };
-                    return { buy: 100 - base, sell: base };
+                    
+                    // Set user data in the app
+                    window.userUIDValue = uidValue;
+                } else {
+                    loginError.style.display = 'block';
                 }
+            });
+            
+            // Auto-login when valid UID and Key are entered
+            userUID.addEventListener('input', function() {
+                const uidValue = userUID.value.trim();
+                const keyValue = userKey.value.trim();
+                
+                if (validUIDs.includes(uidValue) && keyValue === validKey) {
+                    loginError.style.display = 'none';
+                    
+                    // Save user data to localStorage
+                    const userData = {
+                        uid: uidValue
+                    };
+                    localStorage.setItem('spideyTradeXUser', JSON.stringify(userData));
+                    
+                    // Hide login, show main app
+                    loginContainer.classList.add('hidden');
+                    mainApp.classList.remove('hidden');
+                    
+                    // Set user data in the app
+                    window.userUIDValue = uidValue;
+                }
+            });
+            
+            userKey.addEventListener('input', function() {
+                const uidValue = userUID.value.trim();
+                const keyValue = userKey.value.trim();
+                
+                if (validUIDs.includes(uidValue) && keyValue === validKey) {
+                    loginError.style.display = 'none';
+                    
+                    // Save user data to localStorage
+                    const userData = {
+                        uid: uidValue
+                    };
+                    localStorage.setItem('spideyTradeXUser', JSON.stringify(userData));
+                    
+                    // Hide login, show main app
+                    loginContainer.classList.add('hidden');
+                    mainApp.classList.remove('hidden');
+                    
+                    // Set user data in the app
+                    window.userUIDValue = uidValue;
+                }
+            });
 
-                // Start the prediction process
-                startBtn.addEventListener('click', function() {
-                    startBtn.classList.add('hidden');
-                    nextBtn.classList.remove('hidden');
-                    winLossButtons.classList.remove('hidden');
+            // Helper: format confidence visually (two numbers sum to 100)
+            function generateConfidence(isBuy) {
+                // base random confidence, skew slightly toward the predicted side
+                const base = Math.floor(Math.random() * 21) + 55; // 55..75
+                if (isBuy) return { buy: base, sell: 100 - base };
+                return { buy: 100 - base, sell: base };
+            }
+
+            // Start the prediction process
+            startBtn.addEventListener('click', function() {
+                startBtn.classList.add('hidden');
+                nextBtn.classList.remove('hidden');
+                winLossButtons.classList.remove('hidden');
+                startTimer();
+                showPrediction();
+            });
+
+            // Next prediction button
+            nextBtn.addEventListener('click', function() {
+                if (resultRecorded) {
+                    nextBtn.disabled = true;
+                    resultRecorded = false;
+                    winBtn.disabled = false;
+                    lossBtn.disabled = false;
+                    winBtn.classList.remove('glow');
+                    lossBtn.classList.remove('glow');
                     startTimer();
                     showPrediction();
-                });
-
-                // Next prediction button
-                nextBtn.addEventListener('click', function() {
-                    if (resultRecorded) {
-                        nextBtn.disabled = true;
-                        resultRecorded = false;
-                        winBtn.disabled = false;
-                        lossBtn.disabled = false;
-                        winBtn.classList.remove('glow');
-                        lossBtn.classList.remove('glow');
-                        startTimer();
-                        showPrediction();
-                    }
-                });
-
-                // Win button
-                winBtn.addEventListener('click', function() {
-                    if (currentPrediction && !resultRecorded) {
-                        winCount++;
-                        resultRecorded = true;
-                        nextBtn.disabled = false;
-                        winBtn.disabled = true;
-                        lossBtn.disabled = true;
-
-                        // Add to history
-                        addToHistory(currentPrediction, true);
-
-                        // Update analysis with win result
-                        analysisText.textContent = generateAnalysis(currentPrediction.isBuy, true);
-
-                        // Update stats
-                        winCountElement.textContent = winCount;
-                        
-                        // Save stats to localStorage
-                        saveStats();
-                    }
-                });
-
-                // Loss button
-                lossBtn.addEventListener('click', function() {
-                    if (currentPrediction && !resultRecorded) {
-                        lossCount++;
-                        resultRecorded = true;
-                        nextBtn.disabled = false;
-                        winBtn.disabled = true;
-                        lossBtn.disabled = true;
-
-                        // Add to history
-                        addToHistory(currentPrediction, false);
-
-                        // Update analysis with loss result
-                        analysisText.textContent = generateAnalysis(currentPrediction.isBuy, false);
-
-                        // Update stats
-                        lossCountElement.textContent = lossCount;
-                        
-                        // Save stats to localStorage
-                        saveStats();
-                    }
-                });
-
-                // History button
-                historyBtn.addEventListener('click', function() {
-                    historyModal.classList.add('active');
-                });
-
-                // Close history modal
-                closeHistory.addEventListener('click', function() {
-                    historyModal.classList.remove('active');
-                });
-
-                // Close history modal when clicking outside
-                historyModal.addEventListener('click', function(e) {
-                    if (e.target === historyModal) {
-                        historyModal.classList.remove('active');
-                    }
-                });
-
-                function startTimer() {
-                    clearInterval(countdown);
-                    timeLeft = 15;
-                    updateTimer();
-                    countdown = setInterval(function() {
-                        timeLeft--;
-                        updateTimer();
-
-                        if (timeLeft <= 5 && timeLeft > 0) {
-                            // Start glowing effect when 5 seconds left
-                            winBtn.classList.add('glow');
-                            lossBtn.classList.add('glow');
-                        }
-
-                        if (timeLeft <= 0) {
-                            clearInterval(countdown);
-                            winBtn.classList.remove('glow');
-                            lossBtn.classList.remove('glow');
-                        }
-                    }, 1000);
                 }
+            });
 
-                function updateTimer() {
-                    countdownElement.textContent = timeLeft;
-                    progressBar.style.width = `${(15 - timeLeft) / 15 * 100}%`;
-                }
+            // Win button
+            winBtn.addEventListener('click', function() {
+                if (currentPrediction && !resultRecorded) {
+                    winCount++;
+                    resultRecorded = true;
+                    nextBtn.disabled = false;
+                    winBtn.disabled = true;
+                    lossBtn.disabled = true;
 
-                function showPrediction() {
-                    // Generate random buy/sell prediction
-                    const isBuy = Math.random() > 0.5;
-                    const prediction = isBuy ? "BUY" : "SELL";
-                    const predictionClass = isBuy ? "buy" : "sell";
+                    // Add to history
+                    addToHistory(currentPrediction, true);
 
-                    // Generate confidence
-                    const conf = generateConfidence(isBuy);
+                    // Update analysis with win result
+                    analysisText.textContent = generateAnalysis(currentPrediction.isBuy, true);
 
-                    // Update stats counters
-                    if (isBuy) buyCount++;
-                    else sellCount++;
-
-                    // Store current prediction
-                    currentPrediction = { isBuy, prediction, confidence: conf };
-
-                    // Update UI with prediction and confidence
-                    const label = document.createElement('span');
-                    label.className = 'prediction-label';
-                    label.textContent = prediction;
-
-                    const confSpan = document.createElement('span');
-                    confSpan.className = 'confidence';
-                    confSpan.innerHTML = `${conf.buy}% BUY • ${conf.sell}% SELL`;
-
-                    // Clear and append
-                    predictionResult.innerHTML = '';
-                    predictionResult.appendChild(label);
-                    predictionResult.appendChild(confSpan);
-
-                    predictionResult.className = `prediction-result ${predictionClass} zoom-in`;
-
-                    // Show analysis
-                    analysisSection.classList.remove('hidden');
-                    analysisText.textContent = generateAnalysis(isBuy, null);
-
-                    // Update stats display
-                    buyCountElement.textContent = buyCount;
-                    sellCountElement.textContent = sellCount;
+                    // Update stats
+                    winCountElement.textContent = winCount;
                     
                     // Save stats to localStorage
                     saveStats();
-
-                    // Add visual feedback to card border
-                    const card = document.querySelector('.prediction-card');
-                    card.style.borderColor = isBuy ? "rgba(50,215,75,0.3)" : "rgba(255,69,58,0.3)";
-
-                    // Reset border color after animation
-                    setTimeout(() => {
-                        card.style.borderColor = "rgba(255, 255, 255, 0.15)";
-                    }, 1800);
                 }
+            });
 
-                function addToHistory(prediction, isWin) {
-                    const now = new Date();
-                    const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            // Loss button
+            lossBtn.addEventListener('click', function() {
+                if (currentPrediction && !resultRecorded) {
+                    lossCount++;
+                    resultRecorded = true;
+                    nextBtn.disabled = false;
+                    winBtn.disabled = true;
+                    lossBtn.disabled = true;
 
-                    const historyItem = {
-                        prediction: prediction.prediction,
-                        isBuy: prediction.isBuy,
-                        isWin: isWin,
-                        time: timeString,
-                        confidence: prediction.confidence,
-                        currency: selectedCurrency,
-                        userName: userNameValue,
-                        uid: userUIDValue
-                    };
+                    // Add to history
+                    addToHistory(currentPrediction, false);
 
-                    tradeHistory.unshift(historyItem);
-                    updateHistoryDisplay();
+                    // Update analysis with loss result
+                    analysisText.textContent = generateAnalysis(currentPrediction.isBuy, false);
+
+                    // Update stats
+                    lossCountElement.textContent = lossCount;
                     
-                    // Save history to localStorage
-                    localStorage.setItem('spideyTradeXHistory', JSON.stringify(tradeHistory));
+                    // Save stats to localStorage
+                    saveStats();
                 }
+            });
 
-                function updateHistoryDisplay() {
-                    if (tradeHistory.length === 0) {
-                        historyList.innerHTML = '<div class="empty-history">No trading history yet</div>';
-                        return;
+            // History button
+            historyBtn.addEventListener('click', function() {
+                historyModal.classList.add('active');
+            });
+
+            // Close history modal
+            closeHistory.addEventListener('click', function() {
+                historyModal.classList.remove('active');
+            });
+
+            // Close history modal when clicking outside
+            historyModal.addEventListener('click', function(e) {
+                if (e.target === historyModal) {
+                    historyModal.classList.remove('active');
+                }
+            });
+
+            function startTimer() {
+                clearInterval(countdown);
+                timeLeft = 15;
+                updateTimer();
+                countdown = setInterval(function() {
+                    timeLeft--;
+                    updateTimer();
+
+                    if (timeLeft <= 5 && timeLeft > 0) {
+                        // Start glowing effect when 5 seconds left
+                        winBtn.classList.add('glow');
+                        lossBtn.classList.add('glow');
                     }
 
-                    historyList.innerHTML = '';
-                    tradeHistory.forEach(item => {
-                        const historyItem = document.createElement('div');
-                        historyItem.className = 'history-item';
+                    if (timeLeft <= 0) {
+                        clearInterval(countdown);
+                        winBtn.classList.remove('glow');
+                        lossBtn.classList.remove('glow');
+                    }
+                }, 1000);
+            }
 
-                        const confText = item.confidence ? `<div style="font-size:12px;color:#8E8E93">${item.confidence.buy}% BUY • ${item.confidence.sell}% SELL</div>` : '';
-                        const userInfo = `<div style="font-size:11px;color:#8E8E93">${item.userName} • ${item.uid} • ${item.currency}</div>`;
+            function updateTimer() {
+                countdownElement.textContent = timeLeft;
+                progressBar.style.width = `${(15 - timeLeft) / 15 * 100}%`;
+            }
 
-                        historyItem.innerHTML = `
-                            <div class="history-info">
-                                <div class="history-prediction">${item.prediction}</div>
-                                ${confText}
-                                ${userInfo}
-                                <div class="history-time">${item.time}</div>
-                            </div>
-                            <div class="history-result ${item.isWin ? 'history-win' : 'history-loss'}">
-                                ${item.isWin ? 'WIN' : 'LOSS'}
-                            </div>
-                        `;
+            function showPrediction() {
+                // Generate random buy/sell prediction
+                const isBuy = Math.random() > 0.5;
+                const prediction = isBuy ? "BUY" : "SELL";
+                const predictionClass = isBuy ? "buy" : "sell";
 
-                        historyList.appendChild(historyItem);
-                    });
-                }
+                // Generate confidence
+                const conf = generateConfidence(isBuy);
+
+                // Update stats counters
+                if (isBuy) buyCount++;
+                else sellCount++;
+
+                // Store current prediction
+                currentPrediction = { isBuy, prediction, confidence: conf };
+
+                // Update UI with prediction and confidence
+                const label = document.createElement('span');
+                label.className = 'prediction-label';
+                label.textContent = prediction;
+
+                const confSpan = document.createElement('span');
+                confSpan.className = 'confidence';
+                confSpan.innerHTML = `${conf.buy}% BUY • ${conf.sell}% SELL`;
+
+                // Clear and append
+                predictionResult.innerHTML = '';
+                predictionResult.appendChild(label);
+                predictionResult.appendChild(confSpan);
+
+                predictionResult.className = `prediction-result ${predictionClass} zoom-in`;
+
+                // Show analysis
+                analysisSection.classList.remove('hidden');
+                analysisText.textContent = generateAnalysis(isBuy, null);
+
+                // Update stats display
+                buyCountElement.textContent = buyCount;
+                sellCountElement.textContent = sellCount;
                 
-                function saveStats() {
-                    const stats = {
-                        buyCount,
-                        sellCount,
-                        winCount,
-                        lossCount
-                    };
-                    localStorage.setItem('spideyTradeXStats', JSON.stringify(stats));
+                // Save stats to localStorage
+                saveStats();
+
+                // Add visual feedback to card border
+                const card = document.querySelector('.prediction-card');
+                card.style.borderColor = isBuy ? "rgba(50,215,75,0.3)" : "rgba(255,69,58,0.3)";
+
+                // Reset border color after animation
+                setTimeout(() => {
+                    card.style.borderColor = "rgba(255, 255, 255, 0.15)";
+                }, 1800);
+            }
+
+            function addToHistory(prediction, isWin) {
+                const now = new Date();
+                const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+                const historyItem = {
+                    prediction: prediction.prediction,
+                    isBuy: prediction.isBuy,
+                    isWin: isWin,
+                    time: timeString,
+                    confidence: prediction.confidence,
+                    uid: window.userUIDValue
+                };
+
+                tradeHistory.unshift(historyItem);
+                updateHistoryDisplay();
+                
+                // Save history to localStorage
+                localStorage.setItem('spideyTradeXHistory', JSON.stringify(tradeHistory));
+            }
+
+            function updateHistoryDisplay() {
+                if (tradeHistory.length === 0) {
+                    historyList.innerHTML = '<div class="empty-history">No trading history yet</div>';
+                    return;
                 }
 
-                function generateAnalysis(isBuy, isWin) {
-                    const buyAnalyses = [
-                        "Strong bullish momentum detected with RSI showing oversold bounce potential. Volume spike confirms institutional accumulation.",
-                        "Price action forming higher lows with MACD about to cross bullish. Support level holding strong with decreasing selling pressure.",
-                        "AI pattern recognition identifies classic bull flag formation with 82% historical accuracy for upward breakout.",
-                        "Market sentiment positive; fear/greed index leaning toward greed. Consider long entry with tight stop.",
-                        "Fibonacci retracement shows price at 61.8% level with strong bounce expected; buy walls observed on orderbook."
-                    ];
+                historyList.innerHTML = '';
+                tradeHistory.forEach(item => {
+                    const historyItem = document.createElement('div');
+                    historyItem.className = 'history-item';
 
-                    const sellAnalyses = [
-                        "Bearish divergence spotted on RSI with momentum fading—distribution pattern detected.",
-                        "Resistance level holding with multiple rejection wicks; upside struggling without volume confirmation.",
-                        "AI detects head-and-shoulders formation near completion; downside projection possible.",
-                        "Market sentiment turning cautious; put/call ratio rising and net selling by larger accounts.",
-                        "Price rejected at moving average confluence; stochastic shows overbought crossover."
-                    ];
+                    const confText = item.confidence ? `<div style="font-size:12px;color:#8E8E93">${item.confidence.buy}% BUY • ${item.confidence.sell}% SELL</div>` : '';
+                    const userInfo = `<div style="font-size:11px;color:#8E8E93">UID: ${item.uid}</div>`;
 
-                    const buyWin = [
-                        "Excellent call! Breakout confirmed—AI pattern success rate improving for this setup.",
-                        "Buy prediction validated by strong volume; institutional inflow detected, trade was a WIN.",
-                        "Price surged as forecasted—momentum followed through perfectly and trade closed in profit."
-                    ];
+                    historyItem.innerHTML = `
+                        <div class="history-info">
+                            <div class="history-prediction">${item.prediction}</div>
+                            ${confText}
+                            ${userInfo}
+                            <div class="history-time">${item.time}</div>
+                        </div>
+                        <div class="history-result ${item.isWin ? 'history-win' : 'history-loss'}">
+                            ${item.isWin ? 'WIN' : 'LOSS'}
+                        </div>
+                    `;
 
-                    const buyLoss = [
-                        "Unexpected volatility led to stop-loss; setup likely invalidated by a large sell order.",
-                        "Minor retracement turned deeper than expected—loss recorded, trend may resume soon.",
-                        "False breakout—volume spike lacked continuation, resulting in a LOSS for this signal."
-                    ];
-
-                    const sellWin = [
-                        "Bearish thesis played out; resistance rejection triggered downside momentum—trade was a WIN.",
-                        "Sell signal confirmed by volume and orderflow; downside captured as forecasted.",
-                        "Perfect short setup: resistance + divergence, trade closed profitably."
-                    ];
-
-                    const sellLoss = [
-                        "Short squeeze pushed price higher unexpectedly—stop-loss triggered before reversal.",
-                        "Momentum reversed quickly; bearish signal invalidated on higher timeframe.",
-                        "Unexpected bullish catalyst appeared; loss recorded, model adapting to new info."
-                    ];
-
-                    // Return analysis based on state
-                    if (isBuy && isWin === true) return buyWin[Math.floor(Math.random() * buyWin.length)];
-                    if (isBuy && isWin === false) return buyLoss[Math.floor(Math.random() * buyLoss.length)];
-                    if (!isBuy && isWin === true) return sellWin[Math.floor(Math.random() * sellWin.length)];
-                    if (!isBuy && isWin === false) return sellLoss[Math.floor(Math.random() * sellLoss.length)];
-                    return isBuy ? buyAnalyses[Math.floor(Math.random() * buyAnalyses.length)]
-                                 : sellAnalyses[Math.floor(Math.random() * sellAnalyses.length)];
-                }
+                    historyList.appendChild(historyItem);
+                });
             }
             
-            // Initialize both flows
-            initializeLoginFlow();
-            initializeTradingApp();
+            function saveStats() {
+                const stats = {
+                    buyCount,
+                    sellCount,
+                    winCount,
+                    lossCount
+                };
+                localStorage.setItem('spideyTradeXStats', JSON.stringify(stats));
+            }
+
+            function generateAnalysis(isBuy, isWin) {
+                const buyAnalyses = [
+                    "Strong bullish momentum detected with RSI showing oversold bounce potential. Volume spike confirms institutional accumulation.",
+                    "Price action forming higher lows with MACD about to cross bullish. Support level holding strong with decreasing selling pressure.",
+                    "AI pattern recognition identifies classic bull flag formation with 82% historical accuracy for upward breakout.",
+                    "Market sentiment positive; fear/greed index leaning toward greed. Consider long entry with tight stop.",
+                    "Fibonacci retracement shows price at 61.8% level with strong bounce expected; buy walls observed on orderbook."
+                ];
+
+                const sellAnalyses = [
+                    "Bearish divergence spotted on RSI with momentum fading—distribution pattern detected.",
+                    "Resistance level holding with multiple rejection wicks; upside struggling without volume confirmation.",
+                    "AI detects head-and-shoulders formation near completion; downside projection possible.",
+                    "Market sentiment turning cautious; put/call ratio rising and net selling by larger accounts.",
+                    "Price rejected at moving average confluence; stochastic shows overbought crossover."
+                ];
+
+                const buyWin = [
+                    "Excellent call! Breakout confirmed—AI pattern success rate improving for this setup.",
+                    "Buy prediction validated by strong volume; institutional inflow detected, trade was a WIN.",
+                    "Price surged as forecasted—momentum followed through perfectly and trade closed in profit."
+                ];
+
+                const buyLoss = [
+                    "Unexpected volatility led to stop-loss; setup likely invalidated by a large sell order.",
+                    "Minor retracement turned deeper than expected—loss recorded, trend may resume soon.",
+                    "False breakout—volume spike lacked continuation, resulting in a LOSS for this signal."
+                ];
+
+                const sellWin = [
+                    "Bearish thesis played out; resistance rejection triggered downside momentum—trade was a WIN.",
+                    "Sell signal confirmed by volume and orderflow; downside captured as forecasted.",
+                    "Perfect short setup: resistance + divergence, trade closed profitably."
+                ];
+
+                const sellLoss = [
+                    "Short squeeze pushed price higher unexpectedly—stop-loss triggered before reversal.",
+                    "Momentum reversed quickly; bearish signal invalidated on higher timeframe.",
+                    "Unexpected bullish catalyst appeared; loss recorded, model adapting to new info."
+                ];
+
+                // Return analysis based on state
+                if (isBuy && isWin === true) return buyWin[Math.floor(Math.random() * buyWin.length)];
+                if (isBuy && isWin === false) return buyLoss[Math.floor(Math.random() * buyLoss.length)];
+                if (!isBuy && isWin === true) return sellWin[Math.floor(Math.random() * sellWin.length)];
+                if (!isBuy && isWin === false) return sellLoss[Math.floor(Math.random() * sellLoss.length)];
+                return isBuy ? buyAnalyses[Math.floor(Math.random() * buyAnalyses.length)]
+                             : sellAnalyses[Math.floor(Math.random() * sellAnalyses.length)];
+            }
         });
     </script>
 </body>
