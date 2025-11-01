@@ -97,22 +97,6 @@
         .zoom-in { animation:zoomIn 0.5s ease; }
         .pulse { animation:pulse 2s infinite; }
         
-        /* Login Page Styles */
-        .login-container { width:100%; min-height:100vh; display:flex; flex-direction:column; padding:20px; position:relative; z-index:1; max-width:500px; margin:0 auto; }
-        .login-header { display:flex; flex-direction:column; align-items:center; padding:10px 0; gap:10px; margin-bottom:30px; }
-        .login-title { font-size:24px; font-weight:700; margin-bottom:10px; text-align:center; }
-        .login-subtitle { color:#8E8E93; font-size:14px; text-align:center; margin-bottom:30px; }
-        .login-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(30px); border-radius:24px; padding:25px; width:100%; border:1px solid rgba(255,255,255,0.15); box-shadow:0 15px 35px rgba(0,0,0,0.3); }
-        .login-step { display:flex; flex-direction:column; gap:20px; }
-        .input-group { margin-bottom:20px; }
-        .input-label { font-size:14px; color:#8E8E93; margin-bottom:8px; display:block; }
-        .input-field { width:100%; padding:16px; border-radius:12px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.1); color:white; font-size:16px; }
-        .input-field:focus { outline:none; border-color:#007AFF; }
-        .login-btn { background:linear-gradient(90deg,#007AFF,#5856D6); color:white; border:none; border-radius:16px; padding:16px; font-size:16px; font-weight:600; cursor:pointer; transition:all 0.3s ease; box-shadow:0 8px 25px rgba(0,122,255,0.4); width:100%; margin-top:10px; }
-        .login-btn:active { transform:scale(0.98); }
-        .login-btn:disabled { background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.3); cursor:not-allowed; transform:none; box-shadow:0 8px 20px rgba(0,0,0,0.1); }
-        .error-message { color:#FF453A; font-size:14px; text-align:center; margin-top:10px; display:none; }
-        
         /* DeepSeek Theme Enhancements */
         .deepseek-theme {
             background: linear-gradient(135deg, #0f0f1f 0%, #1a1a2e 50%, #16213e 100%);
@@ -140,15 +124,6 @@
             -webkit-text-fill-color: transparent;
         }
         
-        .deepseek-theme .login-btn {
-            background: linear-gradient(90deg, #00D4FF, #0099FF);
-            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
-        }
-        
-        .deepseek-theme .input-field:focus {
-            border-color: #00D4FF;
-        }
-        
         .deepseek-theme .progress-bar {
             background: linear-gradient(90deg, #00D4FF, #0099FF);
         }
@@ -166,14 +141,11 @@
             .win-btn,.loss-btn,.next-btn { padding:14px; font-size:14px; }
             .stat-item { padding:10px 6px; }
             .stat-value { font-size:16px; }
-            .login-card { padding: 20px; }
             .prediction-card { padding: 20px; }
             .prediction-result .confidence { font-size: 12px; }
         }
         
         @media (max-height:700px) {
-            .login-header { margin-bottom: 15px; }
-            .login-subtitle { margin-bottom: 15px; }
             .main-section { justify-content: flex-start; }
             .prediction-card { margin-bottom: 10px; }
             .stats { margin: 10px 0; }
@@ -197,51 +169,8 @@
     <div class="background-image"></div>
     <div class="glass-effect"></div>
 
-    <!-- Login Page -->
-    <div class="login-container" id="loginContainer">
-        <div class="login-header">
-            <div class="logo-container">
-                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgYf279bKwPb7jsJhBjXyn2fGBTrFEUwvinVceLlhj4UWzIF4Zw8XQMPw9Z2QVRYI20a0ejXwub5Dx9tLbT7KkJrCWJTSlkLFAXkDP9AXRRNuSF5xcWwF3GN1GiDXUMYBZJbRSiECAt3Qwqkbnq9QMAtCLUt5EkFuPOkTG3q-X9UB5CRugdhhnXxjmINvo/s1024/ChatGPT%20Image%20Oct%206,%202025,%2012_27_58%20PM.png" alt="Spidey TradeX Logo" class="logo">
-            </div>
-            <div class="app-name">Spidey TradeX</div>
-            <div class="subtitle">AI-Powered Trading Predictions</div>
-            <div class="social-links">
-                <a href="#" class="social-link" target="_blank">
-                    <i class="fab fa-telegram"></i> Telegram
-                </a>
-                <a href="#" class="social-link" target="_blank">
-                    <i class="fab fa-instagram"></i> Instagram
-                </a>
-                <a href="#" class="social-link" target="_blank">
-                    <i class="fab fa-youtube"></i> YouTube
-                </a>
-            </div>
-        </div>
-
-        <!-- Login Form -->
-        <div class="login-card" id="loginForm">
-            <div class="login-title">Access Spidey TradeX</div>
-            <div class="login-subtitle">Enter your UID and Key to continue</div>
-            
-            <div class="login-step">
-                <div class="input-group">
-                    <label class="input-label">UID</label>
-                    <input type="text" class="input-field" id="userUID" placeholder="Enter your UID" inputmode="numeric">
-                </div>
-                
-                <div class="input-group">
-                    <label class="input-label">Key</label>
-                    <input type="password" class="input-field" id="userKey" placeholder="Enter your key">
-                    <div class="error-message" id="loginError">Invalid UID or Key. Please check your credentials.</div>
-                </div>
-                
-                <button class="login-btn" id="loginBtn">Login <i class="fas fa-sign-in-alt"></i></button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main App (Hidden Initially) -->
-    <div class="container hidden" id="mainApp">
+    <!-- Main App -->
+    <div class="container" id="mainApp">
         <div class="header">
             <div class="logo-container">
                 <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgYf279bKwPb7jsJhBjXyn2fGBTrFEUwvinVceLlhj4UWzIF4Zw8XQMPw9Z2QVRYI20a0ejXwub5Dx9tLbT7KkJrCWJTSlkLFAXkDP9AXRRNuSF5xcWwF3GN1GiDXUMYBZJbRSiECAt3Qwqkbnq9QMAtCLUt5EkFuPOkTG3q-X9UB5CRugdhhnXxjmINvo/s1024/ChatGPT%20Image%20Oct%206,%202025,%2012_27_58%20PM.png" alt="Spidey TradeX Logo" class="logo">
@@ -330,52 +259,18 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Check if user is already logged in
-            const savedUserData = localStorage.getItem('spideyTradeXUser');
-            if (savedUserData) {
-                const userData = JSON.parse(savedUserData);
-                // Skip login and show main app
-                document.getElementById('loginContainer').classList.add('hidden');
-                document.getElementById('mainApp').classList.remove('hidden');
-                
-                // Set user data in the app
-                window.userUIDValue = userData.uid;
-                
-                // Load trading history if exists
-                const savedHistory = localStorage.getItem('spideyTradeXHistory');
-                if (savedHistory) {
-                    tradeHistory = JSON.parse(savedHistory);
-                    updateHistoryDisplay();
-                }
-                
-                // Load stats if exists
-                const savedStats = localStorage.getItem('spideyTradeXStats');
-                if (savedStats) {
-                    const stats = JSON.parse(savedStats);
-                    buyCount = stats.buyCount || 0;
-                    sellCount = stats.sellCount || 0;
-                    winCount = stats.winCount || 0;
-                    lossCount = stats.lossCount || 0;
-                    
-                    // Update stats display
-                    buyCountElement.textContent = buyCount;
-                    sellCountElement.textContent = sellCount;
-                    winCountElement.textContent = winCount;
-                    lossCountElement.textContent = lossCount;
-                }
+            // Set default user data
+            window.userNameValue = "Trader";
+            window.userUIDValue = "63004419";
+            window.selectedCurrency = "EUR/USD";
+            
+            // Load trading history if exists
+            let tradeHistory = [];
+            const savedHistory = localStorage.getItem('spideyTradeXHistory');
+            if (savedHistory) {
+                tradeHistory = JSON.parse(savedHistory);
+                updateHistoryDisplay();
             }
-            
-            // Login Elements
-            const loginContainer = document.getElementById('loginContainer');
-            const mainApp = document.getElementById('mainApp');
-            const userUID = document.getElementById('userUID');
-            const userKey = document.getElementById('userKey');
-            const loginBtn = document.getElementById('loginBtn');
-            const loginError = document.getElementById('loginError');
-            
-            // Valid UIDs and Key
-            const validUIDs = ['123456789', '1221122112', '1010101010'];
-            const validKey = 'SrisanthPrediction';
             
             // Main App Elements
             const startBtn = document.getElementById('startBtn');
@@ -406,78 +301,22 @@
             let lossCount = 0;
             let currentPrediction = null;
             let resultRecorded = false;
-            let tradeHistory = [];
             
-            // Login Functionality
-            loginBtn.addEventListener('click', function() {
-                const uidValue = userUID.value.trim();
-                const keyValue = userKey.value.trim();
+            // Load stats if exists
+            const savedStats = localStorage.getItem('spideyTradeXStats');
+            if (savedStats) {
+                const stats = JSON.parse(savedStats);
+                buyCount = stats.buyCount || 0;
+                sellCount = stats.sellCount || 0;
+                winCount = stats.winCount || 0;
+                lossCount = stats.lossCount || 0;
                 
-                // Check if UID and Key are valid
-                if (validUIDs.includes(uidValue) && keyValue === validKey) {
-                    loginError.style.display = 'none';
-                    
-                    // Save user data to localStorage
-                    const userData = {
-                        uid: uidValue
-                    };
-                    localStorage.setItem('spideyTradeXUser', JSON.stringify(userData));
-                    
-                    // Hide login, show main app
-                    loginContainer.classList.add('hidden');
-                    mainApp.classList.remove('hidden');
-                    
-                    // Set user data in the app
-                    window.userUIDValue = uidValue;
-                } else {
-                    loginError.style.display = 'block';
-                }
-            });
-            
-            // Auto-login when valid UID and Key are entered
-            userUID.addEventListener('input', function() {
-                const uidValue = userUID.value.trim();
-                const keyValue = userKey.value.trim();
-                
-                if (validUIDs.includes(uidValue) && keyValue === validKey) {
-                    loginError.style.display = 'none';
-                    
-                    // Save user data to localStorage
-                    const userData = {
-                        uid: uidValue
-                    };
-                    localStorage.setItem('spideyTradeXUser', JSON.stringify(userData));
-                    
-                    // Hide login, show main app
-                    loginContainer.classList.add('hidden');
-                    mainApp.classList.remove('hidden');
-                    
-                    // Set user data in the app
-                    window.userUIDValue = uidValue;
-                }
-            });
-            
-            userKey.addEventListener('input', function() {
-                const uidValue = userUID.value.trim();
-                const keyValue = userKey.value.trim();
-                
-                if (validUIDs.includes(uidValue) && keyValue === validKey) {
-                    loginError.style.display = 'none';
-                    
-                    // Save user data to localStorage
-                    const userData = {
-                        uid: uidValue
-                    };
-                    localStorage.setItem('spideyTradeXUser', JSON.stringify(userData));
-                    
-                    // Hide login, show main app
-                    loginContainer.classList.add('hidden');
-                    mainApp.classList.remove('hidden');
-                    
-                    // Set user data in the app
-                    window.userUIDValue = uidValue;
-                }
-            });
+                // Update stats display
+                buyCountElement.textContent = buyCount;
+                sellCountElement.textContent = sellCount;
+                winCountElement.textContent = winCount;
+                lossCountElement.textContent = lossCount;
+            }
 
             // Helper: format confidence visually (two numbers sum to 100)
             function generateConfidence(isBuy) {
@@ -663,6 +502,8 @@
                     isWin: isWin,
                     time: timeString,
                     confidence: prediction.confidence,
+                    currency: window.selectedCurrency,
+                    userName: window.userNameValue,
                     uid: window.userUIDValue
                 };
 
@@ -685,7 +526,7 @@
                     historyItem.className = 'history-item';
 
                     const confText = item.confidence ? `<div style="font-size:12px;color:#8E8E93">${item.confidence.buy}% BUY • ${item.confidence.sell}% SELL</div>` : '';
-                    const userInfo = `<div style="font-size:11px;color:#8E8E93">UID: ${item.uid}</div>`;
+                    const userInfo = `<div style="font-size:11px;color:#8E8E93">${item.userName} • ${item.uid} • ${item.currency}</div>`;
 
                     historyItem.innerHTML = `
                         <div class="history-info">
