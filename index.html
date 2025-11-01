@@ -301,6 +301,7 @@
             let lossCount = 0;
             let currentPrediction = null;
             let resultRecorded = false;
+            let isActive = false;
             
             // Load stats if exists
             const savedStats = localStorage.getItem('spideyTradeXStats');
@@ -328,16 +329,19 @@
 
             // Start the prediction process
             startBtn.addEventListener('click', function() {
-                startBtn.classList.add('hidden');
-                nextBtn.classList.remove('hidden');
-                winLossButtons.classList.remove('hidden');
-                startTimer();
-                showPrediction();
+                if (!isActive) {
+                    isActive = true;
+                    startBtn.classList.add('hidden');
+                    nextBtn.classList.remove('hidden');
+                    winLossButtons.classList.remove('hidden');
+                    startTimer();
+                    showPrediction();
+                }
             });
 
             // Next prediction button
             nextBtn.addEventListener('click', function() {
-                if (resultRecorded) {
+                if (resultRecorded && isActive) {
                     nextBtn.disabled = true;
                     resultRecorded = false;
                     winBtn.disabled = false;
@@ -351,7 +355,7 @@
 
             // Win button
             winBtn.addEventListener('click', function() {
-                if (currentPrediction && !resultRecorded) {
+                if (currentPrediction && !resultRecorded && isActive) {
                     winCount++;
                     resultRecorded = true;
                     nextBtn.disabled = false;
@@ -374,7 +378,7 @@
 
             // Loss button
             lossBtn.addEventListener('click', function() {
-                if (currentPrediction && !resultRecorded) {
+                if (currentPrediction && !resultRecorded && isActive) {
                     lossCount++;
                     resultRecorded = true;
                     nextBtn.disabled = false;
@@ -430,6 +434,12 @@
                         clearInterval(countdown);
                         winBtn.classList.remove('glow');
                         lossBtn.classList.remove('glow');
+                        // Auto-disable buttons if no selection made
+                        if (!resultRecorded) {
+                            winBtn.disabled = true;
+                            lossBtn.disabled = true;
+                            nextBtn.disabled = false;
+                        }
                     }
                 }, 1000);
             }
